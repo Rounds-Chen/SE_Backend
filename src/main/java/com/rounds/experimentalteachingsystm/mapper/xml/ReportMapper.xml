@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rounds.experimentalteachingsystm.mapper.ReportMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rounds.experimentalteachingsystm.entity.ReportEntity">
+        <id column="report_id" property="reportId" />
+        <result column="title" property="title" />
+        <result column="status" property="status" />
+        <result column="exper_id" property="experId" />
+        <result column="student_id" property="studentId" />
+        <result column="submit_time" property="submitTime" />
+        <result column="score" property="score" />
+        <result column="marker" property="marker" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        report_id, title, status, exper_id, student_id, submit_time, score, marker
+    </sql>
+
+</mapper>

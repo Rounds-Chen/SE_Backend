@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rounds.experimentalteachingsystm.mapper.ExperimentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rounds.experimentalteachingsystm.entity.ExperimentEntity">
+        <id column="exper_id" property="experId" />
+        <result column="exper_name" property="experName" />
+        <result column="demonds" property="demonds" />
+        <result column="deadline" property="deadline" />
+        <result column="weight" property="weight" />
+        <result column="fullmark" property="fullmark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        exper_id, exper_name, demonds, deadline, weight, fullmark
+    </sql>
+
+</mapper>
