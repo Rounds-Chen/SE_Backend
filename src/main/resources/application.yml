@@ -1,33 +1,12 @@
 spring:
   datasource:
-
-    #Name of the datasource. Default to "testdb" when using an embedded database.
-    #??????, ?? testdb
     name: software_engineering
 
-    #Whether to generate a random datasource name.
-    #?????????????? , ?? true
     generate-unique-name: false
 
-    # ?????
-    # Hikari : com.zaxxer.hikari.HikariDataSource
-    # ????Druid : com.alibaba.druid.pool.DruidDataSource
-    # type:
-
-    #Fully qualified name of the JDBC driver. Auto-detected based on the URL by default.
-    #??driver???????jdbc url?????.
-    #Mysql8 : com.mysql.cj.jdbc.Driver
-    #Mysql5.7 : com.mysql.jdbc.Driver
-    #??SqlServer : com.microsoft.sqlserver.jdbc.SQLServerDriver
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-    #JDBC URL of the database. ????JDBC URL
-    # MySQL8.0.x : jdbc:mysql://localhost/dbName?user=minty&password=greatsqldb
-    # MySql5.x : jdbc:mysql://localhost/dnName?user=minty&password=greatsqldb
-    # SqlServer2019 : jdbc:sqlserver://localhost:1433; DatabaseName=test
-    # SqlServer2000 : jdbc:microsoft:sqlserver://localhost:1433; DatabaseName=test
-    url: jdbc:mysql://106.14.97.109/software_engineering?user=se&password=123456
-
+    url: jdbc:mysql://106.14.97.109/software_engineering
     username: se
     password: 123456
 
