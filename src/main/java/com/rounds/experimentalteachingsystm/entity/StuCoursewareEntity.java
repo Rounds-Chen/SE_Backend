@@ -3,7 +3,7 @@ package com.rounds.experimentalteachingsystm.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 
 import java.io.Serializable;
 
@@ -18,12 +18,10 @@ import java.io.Serializable;
 @TableName("stu_courseware")
 public class StuCoursewareEntity implements Serializable {
 
-    @MppMultiId
-    @TableField(value = "student_id")
+    @TableId(value = "student_id")
     private String studentId;
 
-    @MppMultiId
-    @TableField(value = "courseware_id")
+
     private String coursewareId;
 
     

@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021-10-26
  */
 @Mapper
-public interface StuClassMapper extends MppBaseMapper<StuClassEntity> {
+public interface StuClassMapper extends BaseMapper<StuClassEntity> {
 
 }

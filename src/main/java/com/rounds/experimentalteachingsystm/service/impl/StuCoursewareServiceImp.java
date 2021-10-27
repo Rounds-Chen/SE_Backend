@@ -1,6 +1,6 @@
 package com.rounds.experimentalteachingsystm.service.impl;
 
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+
 import com.rounds.experimentalteachingsystm.entity.StuCoursewareEntity;
 import com.rounds.experimentalteachingsystm.mapper.StuCoursewareMapper;
 import com.rounds.experimentalteachingsystm.service.StuCoursewareService;
@@ -16,6 +16,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-25
  */
 @Service
-public class StuCoursewareServiceImp extends MppServiceImpl<StuCoursewareMapper, StuCoursewareEntity> implements StuCoursewareService {
+public class StuCoursewareServiceImp extends ServiceImpl<StuCoursewareMapper, StuCoursewareEntity> implements StuCoursewareService {
 
 }

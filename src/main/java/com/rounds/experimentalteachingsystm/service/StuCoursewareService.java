@@ -1,6 +1,6 @@
 package com.rounds.experimentalteachingsystm.service;
 
-import com.github.jeffreyning.mybatisplus.service.IMppService;
+
 import com.rounds.experimentalteachingsystm.entity.StuCoursewareEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author czy
  * @since 2021-10-25
  */
-public interface StuCoursewareService extends IMppService<StuCoursewareEntity> {
+public interface StuCoursewareService extends IService<StuCoursewareEntity> {
 
 }

@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableMPP
 @MapperScan("com.rounds.experimentalteachingsystm.mapper")
 public class ExperimentalTeachingSystmApplication {
 

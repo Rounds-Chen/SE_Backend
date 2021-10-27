@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021-10-25
  */
 @Mapper
-public interface ClassExperimentMapper extends MppBaseMapper<ClassExperimentEntity> {
+public interface ClassExperimentMapper extends BaseMapper<ClassExperimentEntity> {
 
 }

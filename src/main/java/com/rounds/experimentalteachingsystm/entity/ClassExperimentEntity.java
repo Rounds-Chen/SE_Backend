@@ -3,7 +3,7 @@ package com.rounds.experimentalteachingsystm.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 
 import java.io.Serializable;
 
@@ -18,12 +18,11 @@ import java.io.Serializable;
 @TableName("class_experiment")
 public class ClassExperimentEntity implements Serializable {
 
-      @MppMultiId
-      @TableField(value = "class_id")
+
+      @TableId(value = "class_id")
       private Integer classId;
 
-      @MppMultiId
-      @TableField(value = "exper_id")
+
       private Integer experId;
 
     
