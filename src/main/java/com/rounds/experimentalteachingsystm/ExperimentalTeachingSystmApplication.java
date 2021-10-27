@@ -1,10 +1,12 @@
 package com.rounds.experimentalteachingsystm;
 
+import com.github.jeffreyning.mybatisplus.conf.EnableMPP;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@EnableMPP
 @MapperScan("com.rounds.experimentalteachingsystm.mapper")
 public class ExperimentalTeachingSystmApplication {
 

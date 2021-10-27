@@ -1,5 +1,6 @@
 package com.rounds.experimentalteachingsystm.service.impl;
 
+import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
 import com.rounds.experimentalteachingsystm.entity.ClassExperimentEntity;
 import com.rounds.experimentalteachingsystm.mapper.ClassExperimentMapper;
 import com.rounds.experimentalteachingsystm.service.ClassExperimentService;
@@ -15,6 +16,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-25
  */
 @Service
-public class ClassExperimentServiceImp extends ServiceImpl<ClassExperimentMapper, ClassExperimentEntity> implements ClassExperimentService {
+public class ClassExperimentServiceImp extends MppServiceImpl<ClassExperimentMapper, ClassExperimentEntity> implements ClassExperimentService {
 
 }

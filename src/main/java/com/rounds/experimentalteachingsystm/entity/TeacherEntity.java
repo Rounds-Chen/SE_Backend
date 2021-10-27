@@ -1,5 +1,6 @@
 package com.rounds.experimentalteachingsystm.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
@@ -14,9 +15,8 @@ import java.io.Serializable;
 @TableName("teacher")
 public class TeacherEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-      private String teacherId;
+    @TableId(value = "teacher_id")
+    private String teacherId;
 
     private String teacherName;
 

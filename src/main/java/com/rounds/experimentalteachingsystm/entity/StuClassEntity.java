@@ -1,6 +1,10 @@
 package com.rounds.experimentalteachingsystm.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 import java.io.Serializable;
 
 /**
@@ -13,11 +17,12 @@ import java.io.Serializable;
  */
 @TableName("stu_class")
 public class StuClassEntity implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+      @MppMultiId
+      @TableField(value="student_id")
       private String studentId;
 
+      @MppMultiId
+      @TableField(value = "class_id")
       private Integer classId;
 
     
