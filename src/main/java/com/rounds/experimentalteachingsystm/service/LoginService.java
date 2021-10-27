@@ -10,5 +10,5 @@ public interface LoginService {
      */
     public boolean checkID(String id);
 
-    public Map<String, Integer> doLogin(String id, String pwd);
+    public boolean doLogin(String id, String pwd);
 }

@@ -1,6 +1,6 @@
 package com.rounds.experimentalteachingsystm.mapper;
 
-import com.github.jeffreyning.mybatisplus.base.MppBaseMapper;
+
 import com.rounds.experimentalteachingsystm.entity.StuClassEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;

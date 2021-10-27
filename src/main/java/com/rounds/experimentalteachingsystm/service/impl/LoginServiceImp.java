@@ -30,7 +30,7 @@ public class LoginServiceImp implements LoginService {
     }
 
     @Override
-    public Map<String, Integer> doLogin(String id, String pwd){
+    public boolean doLogin(String id, String pwd){
         QueryWrapper<StudentEntity> wrapper_1=new QueryWrapper<>();
         Map<String,String> map_1=new HashMap<>();
         map_1.put("student_id",id);
@@ -43,15 +43,10 @@ public class LoginServiceImp implements LoginService {
         map_2.put("teacher_pwd",pwd);
         wrapper_2.allEq(map_2);
 
-        Map<String,Integer> res=new HashMap<>();
         if(studentMapper.selectOne(wrapper_1)!=null||teacherMapper.selectOne(wrapper_2)!=null){
             StpUtil.login(id);
-
-
-            res.put("code",200);
-            return res;
+            return true;
         }
-        res.put("code",400);
-        return res;
+        return false;
     }
 }
