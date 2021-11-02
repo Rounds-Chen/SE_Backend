@@ -1,9 +1,16 @@
 package com.rounds.experimentalteachingsystm.controller;
 
 
+import com.rounds.experimentalteachingsystm.entity.CourseEntity;
+import com.rounds.experimentalteachingsystm.service.CourseService;
+import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-10-25
  */
 @RestController
-@RequestMapping("//course-entity")
+@RequestMapping("//courseEntity")
 public class CourseAction {
 
 }

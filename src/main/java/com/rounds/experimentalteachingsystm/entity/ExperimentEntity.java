@@ -32,7 +32,16 @@ public class ExperimentEntity implements Serializable {
 
     private Float fullmark;
 
-    
+    private Integer courseId;
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
     public Integer getExperId() {
         return experId;
     }
@@ -90,6 +99,7 @@ public class ExperimentEntity implements Serializable {
                   ", deadline=" + deadline +
                   ", weight=" + weight +
                   ", fullmark=" + fullmark +
+                  ", courseId="+courseId+
               "}";
     }
 }

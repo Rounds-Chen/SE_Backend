@@ -65,6 +65,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.1</version>
+
         </dependency>
 
 
@@ -87,6 +88,13 @@
             <version>1.27.0</version>
         </dependency>
 
+        <!--json依赖包-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
+        </dependency>
+
 
 
 <!--        <dependency>-->
@@ -98,7 +106,20 @@
     </dependencies>
 
     <build>
+
         <plugins>
+<!--            &lt;!&ndash;Mybatis自动代码插入&ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>com.baomidou</groupId>-->
+<!--                <artifactId>mybatisplus-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash;允许移动生成的文件&ndash;&gt;-->
+<!--                    <verbose>true</verbose>-->
+<!--                    &lt;!&ndash;允许覆盖生成的文件&ndash;&gt;-->
+<!--                    <overwrite>true</overwrite>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

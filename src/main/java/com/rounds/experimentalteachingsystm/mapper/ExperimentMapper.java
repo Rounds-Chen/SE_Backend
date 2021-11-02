@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author czy
- * @since 2021-10-25
+ * @since 2021-11-01
  */
 @Mapper
 public interface ExperimentMapper extends BaseMapper<ExperimentEntity> {

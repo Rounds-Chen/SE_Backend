@@ -10,11 +10,12 @@
         <result column="deadline" property="deadline" />
         <result column="weight" property="weight" />
         <result column="fullmark" property="fullmark" />
+        <result column="course_id" property="courseId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        exper_id, exper_name, demonds, deadline, weight, fullmark
+        exper_id, exper_name, demonds, deadline, weight, fullmark,course_id
     </sql>
 
 </mapper>

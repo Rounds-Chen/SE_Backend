@@ -1,6 +1,6 @@
 package com.rounds.experimentalteachingsystm.service;
 
-import com.rounds.experimentalteachingsystm.entity.ExperimentEntity;
+import com.rounds.experimentalteachingsystm.entity.StuGradeEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author czy
- * @since 2021-11-01
+ * @since 2021-11-02
  */
-public interface ExperimentService extends IService<ExperimentEntity> {
+public interface StuGradeService extends IService<StuGradeEntity> {
 
 }
