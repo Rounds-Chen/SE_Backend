@@ -14,7 +14,7 @@
     <name>ExperimentalTeachingSystm</name>
     <description>ExperimentalTeachingSystm</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -97,28 +97,22 @@
 
 
 
-<!--        <dependency>-->
-<!--            <groupId>com.github.jeffreyning</groupId>-->
-<!--            <artifactId>mybatisplus-plus</artifactId>-->
-<!--            <version>1.5.0-RELEASE</version>-->
-<!--        </dependency>-->
-
     </dependencies>
 
     <build>
 
         <plugins>
-<!--            &lt;!&ndash;Mybatis自动代码插入&ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>com.baomidou</groupId>-->
-<!--                <artifactId>mybatisplus-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    &lt;!&ndash;允许移动生成的文件&ndash;&gt;-->
-<!--                    <verbose>true</verbose>-->
-<!--                    &lt;!&ndash;允许覆盖生成的文件&ndash;&gt;-->
-<!--                    <overwrite>true</overwrite>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatisplus-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                <!-- 输出目录(默认java.io.tmpdir) -->
+                <outputDir>${project.basedir}/src/main/java</outputDir>
+                <!-- 是否覆盖同名文件(默认false) -->
+                <fileOverride>true</fileOverride>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>

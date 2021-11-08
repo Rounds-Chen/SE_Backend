@@ -40,13 +40,6 @@ public class ExperimentAction {
         return AjaxJson.getSuccessData(experimentService.list(wrapper));
     }
 
-//    @PostMapping("/setWweights")
-//    AjaxJson setWeight(JSONArray experWeights){
-//        LambdaUpdateWrapper<ExperimentEntity> wrapper=new LambdaUpdateWrapper<>();
-//
-//        wrapper.eq(ExperimentEntity::getExperId,)
-//    }
-
     @PostMapping("/setWeights")
     AjaxJson setWeights(String exp){
         JSONObject experWeights=JSONObject.parseObject(exp);

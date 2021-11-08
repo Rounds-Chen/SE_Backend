@@ -23,6 +23,13 @@ import java.util.List;
 @RestController
 @RequestMapping("//courseEntity")
 public class CourseAction {
+    @Autowired
+    CourseService courseService;
+
+    @GetMapping("//getAll")
+    AjaxJson getAllCourses(){
+        return AjaxJson.getSuccessData(courseService.list());
+    }
 
 }
 
