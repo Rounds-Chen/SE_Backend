@@ -111,6 +111,7 @@
                 <outputDir>${project.basedir}/src/main/java</outputDir>
                 <!-- 是否覆盖同名文件(默认false) -->
                 <fileOverride>true</fileOverride>
+                    <dataSource/>
                 </configuration>
             </plugin>
 

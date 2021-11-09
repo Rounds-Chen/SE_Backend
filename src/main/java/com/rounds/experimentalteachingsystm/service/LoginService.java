@@ -1,5 +1,7 @@
 package com.rounds.experimentalteachingsystm.service;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
+
 import java.util.Map;
 
 public interface LoginService {
@@ -10,5 +12,5 @@ public interface LoginService {
      */
     public boolean checkID(String id);
 
-    public boolean doLogin(String id, String pwd);
+    public SaTokenInfo doLogin(String id, String pwd);
 }

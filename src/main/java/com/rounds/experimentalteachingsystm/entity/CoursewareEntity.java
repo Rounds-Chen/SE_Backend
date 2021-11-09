@@ -12,12 +12,13 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author czy
- * @since 2021-10-26
+ * @since 2021-11-08
  */
 @TableName("courseware")
 public class CoursewareEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
       @TableId(value = "courseware_id", type = IdType.AUTO)
       private Integer coursewareId;
 
@@ -28,6 +29,8 @@ public class CoursewareEntity implements Serializable {
     private String type;
 
     private String link;
+
+    private Integer courseId;
 
     
     public Integer getCoursewareId() {
@@ -69,6 +72,14 @@ public class CoursewareEntity implements Serializable {
       public void setLink(String link) {
           this.link = link;
       }
+    
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+      public void setCourseId(Integer courseId) {
+          this.courseId = courseId;
+      }
 
     @Override
     public String toString() {
@@ -78,6 +89,7 @@ public class CoursewareEntity implements Serializable {
                   ", time=" + time +
                   ", type=" + type +
                   ", link=" + link +
+                  ", courseId=" + courseId +
               "}";
     }
 }

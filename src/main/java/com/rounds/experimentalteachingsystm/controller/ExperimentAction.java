@@ -1,6 +1,7 @@
 package com.rounds.experimentalteachingsystm.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -32,6 +33,7 @@ public class ExperimentAction {
     @Autowired
     ExperimentService experimentService;
 
+    @SaCheckLogin
     @GetMapping("/getAll")
     AjaxJson getAllExper(Integer courseId){
         LambdaQueryWrapper<ExperimentEntity> wrapper=new LambdaQueryWrapper<>();

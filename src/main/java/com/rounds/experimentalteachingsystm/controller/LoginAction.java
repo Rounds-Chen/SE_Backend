@@ -1,6 +1,7 @@
 package com.rounds.experimentalteachingsystm.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.rounds.experimentalteachingsystm.service.LoginService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -19,7 +23,11 @@ public class LoginAction {
 
     @PostMapping("/doLogin")
     public AjaxJson doLogin(String username, String password) {
-        return loginService.doLogin(username,password)?AjaxJson.getSuccess():AjaxJson.getNotLogin();
+        SaTokenInfo saTokenInfo=loginService.doLogin(username,password);
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", saTokenInfo.getTokenValue());
+        tokenMap.put("tokenHead", saTokenInfo.getTokenName());
+        return saTokenInfo!=null?AjaxJson.getSuccessData(tokenMap):AjaxJson.getNotLogin();
     }
 
     @GetMapping("/checkUser")

@@ -1,5 +1,6 @@
 package com.rounds.experimentalteachingsystm.service.impl;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.rounds.experimentalteachingsystm.entity.StudentEntity;
@@ -30,7 +31,7 @@ public class LoginServiceImp implements LoginService {
     }
 
     @Override
-    public boolean doLogin(String id, String pwd){
+    public SaTokenInfo doLogin(String id, String pwd){
         QueryWrapper<StudentEntity> wrapper_1=new QueryWrapper<>();
         Map<String,String> map_1=new HashMap<>();
         map_1.put("student_id",id);
@@ -45,8 +46,9 @@ public class LoginServiceImp implements LoginService {
 
         if(studentMapper.selectOne(wrapper_1)!=null||teacherMapper.selectOne(wrapper_2)!=null){
             StpUtil.login(id);
-            return true;
+            SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
+            return saTokenInfo;
         }
-        return false;
+        return null;
     }
 }
