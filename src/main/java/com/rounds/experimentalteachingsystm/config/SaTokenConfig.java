@@ -1,4 +1,4 @@
-package com.rounds.experimentalteachingsystm;
+package com.rounds.experimentalteachingsystm.config;
 
 import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
 import org.springframework.context.annotation.Configuration;

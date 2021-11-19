@@ -10,6 +10,19 @@ spring:
     username: se
     password: 123456
 
+  mail:
+    host: smtp.qq.com
+    username: 1418621447@qq.com
+    password: ulwatobgrrdyhdib
+    default-encoding: UTF-8
+
+  redis:
+    database: 0
+    host: 106.14.97.109
+    port: 6379
+    password: tssgrgxd
+
+
 server:
   # 端口
   port: 8081

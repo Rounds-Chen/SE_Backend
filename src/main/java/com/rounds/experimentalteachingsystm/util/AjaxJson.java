@@ -16,7 +16,10 @@ public class AjaxJson implements Serializable{
     public static final int CODE_WARNING = 501;			// 警告状态码
     public static final int CODE_NOT_JUR = 403;			// 无权限状态码
     public static final int CODE_NOT_LOGIN = 401;		// 未登录状态码
-    public static final int CODE_INVALID_REQUEST = 400;	// 无效请求状态码
+//    public static final int CODE_INVALID_REQUEST = 400;	// 无效请求状态码
+
+    public static final int CODE_NO_VERICODE=400; // 邮件验证码过期或不存在状态码
+    public static final int CODE_INVALID_CODE=405;// 邮件验证码输入错误状态码
 
     public int code; 	// 状态码
     public String msg; 	// 描述信息
@@ -110,9 +113,14 @@ public class AjaxJson implements Serializable{
         return new AjaxJson(CODE_NOT_JUR, msg, null, null);
     }
 
-    // 返回一个自定义状态码的
-    public static AjaxJson get(int code, String msg){
-        return new AjaxJson(code, msg, null, null);
+    // 返回邮件验证码不存在或过期的
+    public static AjaxJson getNoVericode(){
+        return new AjaxJson(CODE_NO_VERICODE, "验证码不存在或已过期",null, null);
+    }
+
+    // 返回邮件验证码输入错误的
+    public static AjaxJson getInvalidCode(){
+        return new AjaxJson(CODE_INVALID_CODE,"验证码输入错误",null,null);
     }
 
     // 返回分页和数据的
