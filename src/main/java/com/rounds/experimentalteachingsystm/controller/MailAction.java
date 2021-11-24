@@ -8,9 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -59,12 +57,11 @@ public class MailAction {
 
     /**
      * 向to邮箱发送有效时间1min的验证码
-     * @param to 收件邮箱
      * @param req 请求
      * @return
      */
     @GetMapping("/sendMailCode")
-    public AjaxJson sendVeriCode(String to,HttpServletRequest req){
+    public AjaxJson sendVeriCode(@RequestParam("to") String to, HttpServletRequest req){
         String subject="密码重置验证码";
         String content="验证码获取失败"; //验证码
         String from ="1418621447@qq.com"; //发件人
@@ -74,7 +71,7 @@ public class MailAction {
         try {
             content  =  defaultKaptcha.createText();//获取验证码
             System.out.println(content);
-            ValueOperations forValue = rt.opsForValue();
+            ValueOperations<String, String> forValue = rt.opsForValue();
             forValue.set(ip+"_mail_veri_code", content);
             rt.expire(ip+"_mail_veri_code", 60*1000, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
