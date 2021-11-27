@@ -34,7 +34,7 @@ public class CoursewareAction {
 
         List<CoursewareEntity> ans;
         try{
-            ans=coursewareService.list();
+            ans=coursewareService.list(wrapper);
         }
         catch (Exception e){
             System.out.println(e);

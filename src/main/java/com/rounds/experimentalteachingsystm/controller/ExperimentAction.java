@@ -33,7 +33,7 @@ public class ExperimentAction {
     @Autowired
     ExperimentService experimentService;
 
-    @SaCheckLogin
+//    @SaCheckLogin
     @GetMapping("/getAll")
     AjaxJson getAllExper(Integer courseId){
         LambdaQueryWrapper<ExperimentEntity> wrapper=new LambdaQueryWrapper<>();
