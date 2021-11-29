@@ -8,6 +8,7 @@ import com.rounds.experimentalteachingsystm.service.CoursewareService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -40,8 +41,9 @@ public class CoursewareAction {
             System.out.println(e);
             return AjaxJson.getError();
         }
-
         return AjaxJson.getSuccessData(ans);
     }
+//    @PostMapping("/postCourseware")
+//    AjaxJson
 }
 
