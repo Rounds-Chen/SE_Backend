@@ -1,9 +1,11 @@
 package com.rounds.experimentalteachingsystm.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.rounds.experimentalteachingsystm.entity.StuClassEntity;
 import com.rounds.experimentalteachingsystm.entity.StudentEntity;
+
 import com.rounds.experimentalteachingsystm.service.StuClassService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StuClassAction {
     @Autowired
     StuClassService stuClassService;
+
 
     /**
      * 在班级中添加学生
@@ -50,5 +53,16 @@ public class StuClassAction {
         }
     }
 
+
+    @PostMapping("//postStuClass")
+    AjaxJson postStuClass(StuClassEntity stuClassEntity){
+        return AjaxJson.getSuccessData(stuClassService.save(stuClassEntity));
+    }
+    @PostMapping("//updateStuClass")
+    AjaxJson updateStuClass(StuClassEntity stuClassEntity){
+        boolean flg=stuClassService.updateById(stuClassEntity);
+        if(flg) return AjaxJson.getSuccess();
+        else return  AjaxJson.getError();
+    }
 }
 
