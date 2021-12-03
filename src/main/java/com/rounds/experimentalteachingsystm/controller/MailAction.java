@@ -41,7 +41,7 @@ public class MailAction {
      * @param req
      * @return
      */
-    @GetMapping("/veriMailCode")
+    @GetMapping("/mailService")
     @ResponseBody
     public AjaxJson verifyCode(HttpServletRequest req,String inputCode) {
         String ip=req.getRemoteAddr();

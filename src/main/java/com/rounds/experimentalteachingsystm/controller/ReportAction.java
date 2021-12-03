@@ -31,6 +31,11 @@ public class ReportAction {
     @Autowired
     ReportService reportService;
 
+    /**
+     * 获取某学生所有报告
+     * @param id 学生id
+     * @return
+     */
     @GetMapping("//getReport")
     AjaxJson getReportOfStu(String id){
         LambdaUpdateWrapper<ReportEntity> wrapper=new LambdaUpdateWrapper<>();

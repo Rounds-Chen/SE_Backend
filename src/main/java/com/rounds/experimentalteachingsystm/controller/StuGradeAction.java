@@ -27,6 +27,12 @@ public class StuGradeAction {
     @Autowired
     StuGradeService stuGradeService;
 
+    /**
+     * 获取某学生某门课的成绩
+     * @param student_id 学生id
+     * @param course_id 课程id
+     * @return
+     */
     @GetMapping("/getStuGradeByCourseId")
     AjaxJson getStuGradeByCourseId(String student_id,String course_id){
         LambdaQueryWrapper<StuGradeEntity> wrapper=new LambdaQueryWrapper<>();

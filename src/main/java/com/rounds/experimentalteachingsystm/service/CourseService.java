@@ -3,6 +3,8 @@ package com.rounds.experimentalteachingsystm.service;
 import com.rounds.experimentalteachingsystm.entity.CourseEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  *  服务类

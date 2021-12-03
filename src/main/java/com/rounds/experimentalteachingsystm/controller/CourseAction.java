@@ -27,6 +27,10 @@ public class CourseAction {
     @Autowired
     CourseService courseService;
 
+    /**
+     * 获取所有课程
+     * @return
+     */
     @GetMapping("//getAll")
     AjaxJson getAllCourses(){
         return AjaxJson.getSuccessData(courseService.list());

@@ -4,13 +4,19 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.rounds.experimentalteachingsystm.entity.StudentEntity;
+import com.rounds.experimentalteachingsystm.entity.TeacherEntity;
 import com.rounds.experimentalteachingsystm.service.LoginService;
+import com.rounds.experimentalteachingsystm.service.StudentService;
+import com.rounds.experimentalteachingsystm.service.TeacherService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.repository.util.QueryExecutionConverters;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -32,6 +38,11 @@ public class LoginAction {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private TeacherService teacherService;
+
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
     DefaultKaptcha defaultKaptcha;
@@ -98,5 +109,61 @@ public class LoginAction {
 
     }
 
+    /**
+     * 重置密码
+     * @param id 用户id
+     * @param flag 用户身份 1：教师，0：学生
+     * @param pwd 新密码
+     * @return
+     */
+    @PostMapping("/editPwd")
+    public AjaxJson editPassword(String id,boolean flag,String pwd){
+
+        if(flag) {
+            LambdaUpdateWrapper<TeacherEntity> wrapper=new LambdaUpdateWrapper<>();
+            wrapper.eq(TeacherEntity::getTeacherId,id).set(TeacherEntity::getTeacherPwd,pwd);
+            if(!teacherService.update(wrapper)){
+                return AjaxJson.getError();
+            }
+            else{
+                return AjaxJson.getSuccessData(teacherService.getById(id).getTeacherPwd());
+            }
+        }else{
+            LambdaUpdateWrapper<StudentEntity> wrapper=new LambdaUpdateWrapper<>();
+            wrapper.eq(StudentEntity::getStudentId,id).set(StudentEntity::getStudentPwd,pwd);
+            if(!studentService.update(wrapper)) {
+                return AjaxJson.getError();
+            }else{
+                return AjaxJson.getSuccessData(studentService.getById(id).getStudentPwd());
+            }
+        }
+
+    }
+
+    /**
+     * 获取旧密码
+     * @param id 用户id
+     * @param flag 1——教师；0——学生
+     * @return
+     */
+    @GetMapping("/getPwd")
+    public AjaxJson getPassword(String id,Boolean flag){
+        Map<String,String> ans=new HashMap<>();
+        if(flag) {
+            TeacherEntity entity=teacherService.getById(id);
+            if(entity==null){
+                return AjaxJson.getError();
+            }
+            ans.put("password",entity.getTeacherPwd());
+        }else{
+            StudentEntity entity=studentService.getById(id);
+            if(studentService.getById(id)==null){
+                return AjaxJson.getError();
+            }
+            ans.put("password",entity.getStudentPwd());
+        }
+        return AjaxJson.getSuccessData(ans);
+
+    }
 
 }

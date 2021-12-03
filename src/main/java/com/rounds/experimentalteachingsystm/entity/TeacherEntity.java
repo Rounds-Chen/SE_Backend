@@ -24,7 +24,7 @@ public class TeacherEntity implements Serializable {
 
     private String teacherPwd;
 
-    private String identity;
+    private Integer identity;
 
     private Boolean authority;
 
@@ -63,11 +63,11 @@ public class TeacherEntity implements Serializable {
           this.teacherPwd = teacherPwd;
       }
     
-    public String getIdentity() {
+    public Integer getIdentity() {
         return identity;
     }
 
-      public void setIdentity(String identity) {
+      public void setIdentity(Integer identity) {
           this.identity = identity;
       }
     
