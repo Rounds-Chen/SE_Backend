@@ -1,8 +1,7 @@
 package com.rounds.experimentalteachingsystm.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -48,6 +47,7 @@ public class AucReportEntity implements Serializable {
       /**
      * 提交时间
      */
+      @TableField(value = "submit_time",fill= FieldFill.INSERT)
       private LocalDateTime submitTime;
 
       /**

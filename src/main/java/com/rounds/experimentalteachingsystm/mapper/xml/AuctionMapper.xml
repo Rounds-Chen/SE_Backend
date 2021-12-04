@@ -10,11 +10,12 @@
         <result column="start_time" property="startTime" />
         <result column="end_time" property="endTime" />
         <result column="balance_price" property="balancePrice" />
+        <result column="description" property="description" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        auction_id, initiator_id, auction_title, start_time, end_time, balance_price
+        auction_id, initiator_id, auction_title, start_time, end_time, balance_price,description
     </sql>
 
 </mapper>

@@ -31,7 +31,12 @@ public class AuctionEntity implements Serializable {
      */
       private String initiatorId;
 
-      /**
+    /**
+     * 拍卖详情
+     */
+    private String description;
+
+    /**
      * 拍卖名称
      */
       private String auctionTitle;
@@ -51,7 +56,14 @@ public class AuctionEntity implements Serializable {
      */
       private BigDecimal balancePrice;
 
-    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Integer getAuctionId() {
         return auctionId;
     }
