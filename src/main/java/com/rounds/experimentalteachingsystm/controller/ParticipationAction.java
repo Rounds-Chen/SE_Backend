@@ -74,6 +74,34 @@ public class ParticipationAction {
         return AjaxJson.getError();
     }
 
+    /**
+     * 获取某拍卖供给价格曲线
+     * @param id 拍卖id
+     * @return
+     */
+    @GetMapping("/getSupPriceCurve")
+    AjaxJson getSupPriceCurve(Integer id){
+        List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.FALSE);
+        if(ans!=null){
+            return AjaxJson.getSuccessData(ans);
+        }
+        return AjaxJson.getError();
+    }
+
+    /**
+     * 获取某拍卖需求价格曲线
+     * @param id
+     * @return
+     */
+    @GetMapping("/getDemPriceCurve")
+    AjaxJson getDemPriceCurve(Integer id){
+        List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.TRUE);
+        if(ans!=null){
+            return AjaxJson.getSuccessData(ans);
+        }
+        return AjaxJson.getError();
+    }
+
 
 }
 
