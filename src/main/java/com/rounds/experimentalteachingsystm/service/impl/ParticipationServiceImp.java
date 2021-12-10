@@ -29,7 +29,7 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
     @Override
     public List<List<BigDecimal>> getPriceCurve(Integer id,Boolean role) {
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
-        wrapper.eq(ParticipationEntity::getId,id).eq(ParticipationEntity::getRole,0).
+        wrapper.eq(ParticipationEntity::getAucId,id).eq(ParticipationEntity::getRole,0).
                 select(ParticipationEntity::getPrice);
         List<BigDecimal> prices=mapper.selectObjs(wrapper).stream()
                 .map(o -> (BigDecimal)o)

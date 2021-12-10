@@ -33,17 +33,17 @@ public class ParticipationAction {
 
     /**
      * 上传出价
-     * @param id 出价人id
      * @param role 参与角色：0-供给 1-需求
      * @param price 出价
      * @return
      */
     @PostMapping("/postPrice")
-    AjaxJson postPrice(String id, Boolean role, BigDecimal price){
+    public AjaxJson postPrice(String userId,Integer aucId, Boolean role, BigDecimal price){
         ParticipationEntity entity=new ParticipationEntity();
 
         entity.setPrice(price);
-        entity.setUserId(id);
+        entity.setUserId(userId);
+        entity.setAucId(aucId);
         entity.setRole(role);
 
         if(participationService.save(entity)){
@@ -59,9 +59,9 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getPrice")
-    AjaxJson getPrice(Integer id,Boolean role){
+    public AjaxJson getPrice(Integer id,Boolean role){
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
-        wrapper.eq(ParticipationEntity::getId,id).eq(ParticipationEntity::getRole,role);
+        wrapper.eq(ParticipationEntity::getAucId,id).eq(ParticipationEntity::getRole,role);
 
         try {
             List<ParticipationEntity> ans = participationService.list(wrapper);
@@ -80,7 +80,7 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getSupPriceCurve")
-    AjaxJson getSupPriceCurve(Integer id){
+   public AjaxJson getSupPriceCurve(Integer id){
         List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.FALSE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
@@ -94,13 +94,35 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getDemPriceCurve")
-    AjaxJson getDemPriceCurve(Integer id){
+    public AjaxJson getDemPriceCurve(Integer id){
         List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.TRUE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
         }
         return AjaxJson.getError();
     }
+
+    /**
+     * 获取用户出价信息
+     * @param aucId
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getUserPrice")
+    public AjaxJson getUserPrice(Integer aucId, String userId){
+        LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
+        wrapper.eq(ParticipationEntity::getAucId,aucId).eq(ParticipationEntity::getUserId,userId);
+
+        try{
+            BigDecimal price=participationService.getOne(wrapper).getPrice();
+            return AjaxJson.getSuccessData(price);
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return AjaxJson.getError();
+        }
+    }
+
 
 
 }

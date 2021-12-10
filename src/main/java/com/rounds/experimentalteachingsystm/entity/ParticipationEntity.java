@@ -30,6 +30,11 @@ public class ParticipationEntity implements Serializable {
      */
       private String userId;
 
+    /**
+     * 拍卖id
+     */
+    private Integer aucId;
+
       /**
      * 参与角色：0-供给 1-需求
      */
@@ -40,7 +45,14 @@ public class ParticipationEntity implements Serializable {
      */
       private BigDecimal price;
 
-    
+    public Integer getAucId() {
+        return aucId;
+    }
+
+    public void setAucId(Integer aucId) {
+        this.aucId = aucId;
+    }
+
     public Integer getId() {
         return id;
     }
