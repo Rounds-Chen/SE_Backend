@@ -7,6 +7,10 @@ import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.rounds.experimentalteachingsystm.entity.TeacherEntity;
 import com.rounds.experimentalteachingsystm.service.StudentService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("//studentEntity")
+@Api
 public class StudentAction {
     @Autowired
     StudentService studentService;
@@ -34,6 +39,11 @@ public class StudentAction {
      * @return
      */
     @PostMapping("/editGender")
+    @ApiOperation(value = "修改学生性别")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "gender",value = "新性别",dataType = "boolean"),
+            @ApiImplicitParam(name = "id",value = "学生id",dataType = "String")
+    })
     public AjaxJson editGender(boolean gender,String id){
         LambdaUpdateWrapper<StudentEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(StudentEntity::getStudentId,id).set(StudentEntity::getGender,gender);
@@ -59,6 +69,11 @@ public class StudentAction {
      * @return
      */
     @PostMapping("/editMailAddr")
+    @ApiOperation(value = "修改学生邮箱")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "addr",value = "邮箱地址",dataType = "String"),
+            @ApiImplicitParam(name = "id",value = "学生id",dataType = "String")
+    })
     public AjaxJson editMailAddr(String addr,String id){
         LambdaUpdateWrapper<StudentEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(StudentEntity::getStudentId,id).set(StudentEntity::getMailAddr,addr);

@@ -12,6 +12,7 @@ import com.rounds.experimentalteachingsystm.service.LoginService;
 import com.rounds.experimentalteachingsystm.service.StudentService;
 import com.rounds.experimentalteachingsystm.service.TeacherService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -34,6 +35,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 
 @RestController
 @RequestMapping("/login")
+@Api
 public class LoginAction {
     @Autowired
     private LoginService loginService;
@@ -53,7 +55,8 @@ public class LoginAction {
      * @return 是否成功登陆
      */
     @PostMapping("/doLogin")
-    public AjaxJson doLogin(HttpServletRequest req) {
+    @ApiOperation(value = "登陆请求")
+    public AjaxJson doLogin(@ApiParam(value = "登陆请求") HttpServletRequest req) {
         String username=req.getParameter("username");
         String password=req.getParameter("password");
         String ip = req.getRemoteAddr();
@@ -85,6 +88,7 @@ public class LoginAction {
      * @return codeText: String 验证码 codeImage：byte[] 图片字节流
      */
     @GetMapping("/getVeriCode")
+    @ApiOperation(value = "获取登陆图片验证吗")
     public AjaxJson getVeriCode(){
         byte[] captchaCodeAsJpeg = null;
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
@@ -117,6 +121,12 @@ public class LoginAction {
      * @return
      */
     @PostMapping("/editPwd")
+    @ApiOperation("重置密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "用户id",dataType = "String"),
+            @ApiImplicitParam(name = "flag",value = "用户身份：1-教师 0-学生",dataType = "boolean"),
+            @ApiImplicitParam(name = "pwd",value = "新密码",dataType = "String")
+    })
     public AjaxJson editPassword(String id,boolean flag,String pwd){
 
         if(flag) {

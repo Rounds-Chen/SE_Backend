@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.rounds.experimentalteachingsystm.entity.ExperimentEntity;
 import com.rounds.experimentalteachingsystm.service.ExperimentService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,13 +32,15 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("//experimentEntity")
+@Api
 public class ExperimentAction {
     @Autowired
     ExperimentService experimentService;
 
 //    @SaCheckLogin
     @GetMapping("/getAll")
-    AjaxJson getAllExper(Integer courseId){
+    @ApiOperation(value = "获取某课程所有实验")
+    AjaxJson getAllExper(@ApiParam(value = "课程id") Integer courseId){
         LambdaQueryWrapper<ExperimentEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ExperimentEntity::getCourseId,courseId);
 
@@ -43,7 +48,8 @@ public class ExperimentAction {
     }
 
     @PostMapping("/setWeights")
-    AjaxJson setWeights(String exp){
+    @ApiOperation("设置实验权重")
+    AjaxJson setWeights(@ApiParam(value = "权重json序列化结果") String exp){
         JSONObject experWeights=JSONObject.parseObject(exp);
         LambdaUpdateWrapper<ExperimentEntity> wrapper=new LambdaUpdateWrapper<>();
 

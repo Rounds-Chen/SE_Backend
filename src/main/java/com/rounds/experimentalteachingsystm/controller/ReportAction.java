@@ -8,6 +8,9 @@ import com.rounds.experimentalteachingsystm.entity.ReportEntity;
 import com.rounds.experimentalteachingsystm.mapper.ReportMapper;
 import com.rounds.experimentalteachingsystm.service.ReportService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +30,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("//report-entity")
+@Api
 public class ReportAction {
     @Autowired
     ReportService reportService;
@@ -37,7 +41,8 @@ public class ReportAction {
      * @return
      */
     @GetMapping("//getReport")
-    AjaxJson getReportOfStu(String id){
+    @ApiOperation(value = "获取某学生所有报告")
+    AjaxJson getReportOfStu(@ApiParam(value = "学生id") String id){
         LambdaUpdateWrapper<ReportEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(ReportEntity::getStudentId,id);
 

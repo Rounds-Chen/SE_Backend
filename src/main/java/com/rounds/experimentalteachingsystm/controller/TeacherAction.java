@@ -8,11 +8,16 @@ import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.rounds.experimentalteachingsystm.entity.TeacherEntity;
 import com.rounds.experimentalteachingsystm.service.TeacherService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.util.Validate;
 
 /**
  * <p>
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("//teacherEntity")
+@Api
 public class TeacherAction {
 
     @Autowired
@@ -36,6 +42,11 @@ public class TeacherAction {
      * @return
      */
     @PostMapping("/editGender")
+    @ApiOperation(value = "修改教师性别")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "gender",value = "性别",dataType = "boolean"),
+            @ApiImplicitParam(name = "id",value = "教师id",dataType = "String")
+    })
     public AjaxJson editGender(boolean gender,String id){
         LambdaUpdateWrapper<TeacherEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(TeacherEntity::getTeacherId,id).set(TeacherEntity::getGender,gender);
@@ -60,6 +71,11 @@ public class TeacherAction {
      * @param id 教师id
      * @return
      */
+    @ApiOperation(value = "修改教师邮箱")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "addr",value = "邮箱",dataType = "String"),
+            @ApiImplicitParam(name = "id",value = "教师id",dataType = "String")
+    })
     @PostMapping("/editMailAddr")
     public AjaxJson editMailAddr(String addr,String id){
         LambdaUpdateWrapper<TeacherEntity> wrapper=new LambdaUpdateWrapper<>();
@@ -83,6 +99,11 @@ public class TeacherAction {
      * @param valid 是否有权限
      * @return
      */
+    @ApiOperation(value = "设置助教批改权限")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "助教id",dataType = "String"),
+            @ApiImplicitParam(name = "valid",value = "是否有批改权限",dataType = "boolean")
+    })
     @PostMapping("/setAuthority")
     public AjaxJson setAuthority(String id,boolean valid){
         LambdaUpdateWrapper<TeacherEntity> wrapper =new LambdaUpdateWrapper<>();

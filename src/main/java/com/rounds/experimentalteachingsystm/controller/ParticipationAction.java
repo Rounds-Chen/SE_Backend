@@ -6,12 +6,14 @@ import com.rounds.experimentalteachingsystm.entity.AuctionEntity;
 import com.rounds.experimentalteachingsystm.entity.ParticipationEntity;
 import com.rounds.experimentalteachingsystm.service.ParticipationService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,6 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("//participationEntity")
+@Api
 public class ParticipationAction {
     @Autowired
     ParticipationService participationService;
@@ -38,6 +41,13 @@ public class ParticipationAction {
      * @return
      */
     @PostMapping("/postPrice")
+    @ApiOperation(value = "上传出价")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "角色id",dataType = "String"),
+            @ApiImplicitParam(name = "aucId",value = "拍卖id",dataType = "Integer"),
+            @ApiImplicitParam(name = "role",value = "参与角色 0-供给 1-需求",dataType = "Boolean"),
+            @ApiImplicitParam(name = "price",value = "出价",dataType = "BigDecimal")
+    })
     public AjaxJson postPrice(String userId,Integer aucId, Boolean role, BigDecimal price){
         ParticipationEntity entity=new ParticipationEntity();
 
@@ -59,6 +69,11 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getPrice")
+    @ApiOperation(value = "获取某拍卖出价信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "拍卖id",dataType = "Integer"),
+            @ApiImplicitParam(name = "role",value = "参与角色 0-供给 1-需求",dataType = "Boolean")
+    })
     public AjaxJson getPrice(Integer id,Boolean role){
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ParticipationEntity::getAucId,id).eq(ParticipationEntity::getRole,role);
@@ -80,7 +95,8 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getSupPriceCurve")
-   public AjaxJson getSupPriceCurve(Integer id){
+    @ApiOperation(value = "获取某拍卖供给曲线")
+   public AjaxJson getSupPriceCurve(@ApiParam(value = "拍卖id") Integer id){
         List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.FALSE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
@@ -94,7 +110,8 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getDemPriceCurve")
-    public AjaxJson getDemPriceCurve(Integer id){
+    @ApiOperation(value = "获取某拍卖需求价格曲线")
+    public AjaxJson getDemPriceCurve(@ApiParam(value = "拍卖id") Integer id){
         List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.TRUE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
@@ -109,6 +126,11 @@ public class ParticipationAction {
      * @return
      */
     @GetMapping("/getUserPrice")
+    @ApiOperation(value = "获取用户出价信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "aucId",value = "拍卖id",dataType = "Integer"),
+            @ApiImplicitParam(name = "userId",value = "用户id",dataType = "String")
+    })
     public AjaxJson getUserPrice(Integer aucId, String userId){
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ParticipationEntity::getAucId,aucId).eq(ParticipationEntity::getUserId,userId);

@@ -5,6 +5,10 @@ import com.rounds.experimentalteachingsystm.entity.AucReportEntity;
 import com.rounds.experimentalteachingsystm.service.AucReportService;
 import com.rounds.experimentalteachingsystm.service.FileStorageService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +29,7 @@ import java.util.Map;
  * @since 2021-12-01
  */
 @RestController
+@Api
 @RequestMapping("//aucReportEntity")
 public class AucReportAction {
     @Resource
@@ -41,6 +46,11 @@ public class AucReportAction {
      * @return
      */
     @PostMapping("//postReport")
+    @ApiOperation(value="提交报告")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="stuId",value = "学生id",dataType = "String"),
+            @ApiImplicitParam(name="aucId",value = "拍卖id",dataType = "Integer")
+    })
     AjaxJson submitReport(String stuId, Integer aucId, MultipartFile file){
             String filePath=fileStorageService.upload(file);
             String suffix=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));

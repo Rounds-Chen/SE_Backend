@@ -2,6 +2,7 @@ package com.rounds.experimentalteachingsystm.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -42,7 +43,18 @@ public class MailAction {
      * @return
      */
     @GetMapping("/mailService")
-    @ResponseBody
+//    @ResponseBody
+//    @ApiOperation(value = "检查验证码是否正确")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "req",value = "验证发送请求",dataType = "HttpServletRequest"),
+//            @ApiImplicitParam(name = "inputCode",value = "输入的验证码",dataType = "String")
+//    })
+//    @ApiResponses({
+//            @ApiResponse(code=200,message = "ok"),
+//            @ApiResponse(code=400,message = "验证码过期或不存在"),
+//            @ApiResponse(code=405,message = "验证码错误")
+//
+//    })
     public AjaxJson verifyCode(HttpServletRequest req,String inputCode) {
         String ip=req.getRemoteAddr();
         ValueOperations<String,String> forValue=rt.opsForValue();
@@ -61,7 +73,12 @@ public class MailAction {
      * @return
      */
     @GetMapping("/sendMailCode")
-    public AjaxJson sendVeriCode(@RequestParam("to") String to, HttpServletRequest req){
+//    @ApiOperation("向邮箱发送邮件")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "to",value = "收件邮箱",dataType = "String"),
+//            @ApiImplicitParam(name = "req",value = "发送邮件请求",dataType = "HttpServletRequest")
+//    })
+    public AjaxJson sendVeriCode(@ApiParam(name = "to",value = "收件邮箱")@RequestParam("to") String to, HttpServletRequest req){
         String subject="密码重置验证码";
         String content="验证码获取失败"; //验证码
         String from ="1418621447@qq.com"; //发件人

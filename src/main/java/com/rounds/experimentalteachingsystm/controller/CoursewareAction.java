@@ -6,6 +6,7 @@ import com.rounds.experimentalteachingsystm.entity.CoursewareEntity;
 import com.rounds.experimentalteachingsystm.service.CoursewareService;
 import com.rounds.experimentalteachingsystm.service.FileStorageService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("//coursewareEntity")
+@Api
 public class CoursewareAction {
     @Autowired
     CoursewareService coursewareService;
@@ -42,7 +44,8 @@ public class CoursewareAction {
      * @return
      */
     @GetMapping("//getCourseware")
-    public AjaxJson getCourseware(Integer id){
+    @ApiOperation(value = "获取某课程所有课件")
+    public AjaxJson getCourseware(@ApiParam(value = "课程id") Integer id){
         LambdaUpdateWrapper<CoursewareEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(CoursewareEntity::getCourseId,id);
 
@@ -63,7 +66,8 @@ public class CoursewareAction {
      * @return
      */
     @GetMapping("/getCoursewareById")
-    public AjaxJson getCoursewareById(Integer id){
+    @ApiOperation(value = "获取某课件")
+    public AjaxJson getCoursewareById(@ApiParam(value = "课程id") Integer id){
         CoursewareEntity entity=coursewareService.getById(id);
         if(entity!=null){
             return AjaxJson.getSuccessData(entity);
@@ -78,6 +82,11 @@ public class CoursewareAction {
      * @return
      */
     @PostMapping("/postCourseware")
+    @ApiOperation(value = "上传课件")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "课程id",dataType = "Integer"),
+            @ApiImplicitParam(name = "file",value = "文件",dataType = "MultipartFile")
+    })
     public AjaxJson uploadCourseware(Integer id, MultipartFile file){
         String filePath=fileStorageService.upload(file);
         String suffix=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -105,7 +114,8 @@ public class CoursewareAction {
      * @return
      */
     @PostMapping("/deleteCourseWare")
-    public AjaxJson deleteCourseware(Integer id){
+    @ApiOperation(value = "删除课件")
+    public AjaxJson deleteCourseware(@ApiParam(value = "课件id") Integer id){
         String fileLink=coursewareService.getById(id).getLink();
         fileStorageService.delete(fileLink);
 
