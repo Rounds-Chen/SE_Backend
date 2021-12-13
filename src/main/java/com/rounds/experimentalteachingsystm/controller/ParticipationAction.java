@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -146,6 +147,18 @@ public class ParticipationAction {
         }
     }
 
+
+    @GetMapping("/getWillPriceForm")
+    @ApiOperation(value = "获取意愿表")
+    @ApiImplicitParam(name = "id",value="拍卖id",dataType = "Integer")
+    AjaxJson getWillPriceForm(Integer id){
+        List<List<Float>> ans=new LinkedList<>();
+        if(ans!=null){
+            return AjaxJson.getSuccessData(ans);
+        }
+
+        return AjaxJson.getError();
+    }
 
 
 }

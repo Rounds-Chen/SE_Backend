@@ -6,6 +6,9 @@ import com.rounds.experimentalteachingsystm.mapper.ParticipationMapper;
 import com.rounds.experimentalteachingsystm.service.ParticipationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +58,34 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
             }
             count+=1;
         }
+
+        return ans;
+    }
+
+    @Override
+    public List<List<Float>> getWillPriceForm(Integer id) {
+        LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
+        wrapper.eq(ParticipationEntity::getAucId,id).eq(ParticipationEntity::getRole,0).
+                select(ParticipationEntity::getPrice);
+        List<Float> prices=mapper.selectObjs(wrapper).stream()
+                .map(o -> (Float)o)
+                .collect(Collectors.toList());
+        Collections.sort(prices);
+
+        List<List<Float>> ans=new LinkedList<>();
+        Float count=1f;
+        Float rest=Float.valueOf(prices.size());
+        Float prePrice=prices.get(0);
+        for(int i=1;i<prices.size();i++){
+            if(prePrice!=prices.get(i)){
+                ans.add(Arrays.asList(prePrice,count,rest,rest*prePrice));
+                rest=rest-count;
+                count=0f;
+                prePrice=prices.get(i);
+            }
+            count+=1f;
+        }
+        ans.add(Arrays.asList(prePrice,count,rest,rest*prePrice));
 
         return ans;
     }
