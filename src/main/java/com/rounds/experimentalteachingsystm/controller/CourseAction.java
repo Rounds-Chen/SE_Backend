@@ -26,6 +26,7 @@ import java.util.List;
  * @since 2021-10-25
  */
 @RestController
+@Api
 @RequestMapping("//courseEntity")
 public class CourseAction {
     @Autowired
@@ -57,6 +58,7 @@ public class CourseAction {
     @ApiImplicitParam(name = "id",value = "学生id",dataType = "String")
     AjaxJson getStuAllCourses(String id){
         List<Integer> ans=courseService.getStuAllCours(id);
+        System.out.println("某学生所有课程"+ans.toString());
 
         try {
             List<CourseEntity> res = new LinkedList<>();

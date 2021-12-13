@@ -46,7 +46,7 @@ public class ParticipationAction {
             @ApiImplicitParam(name = "role",value = "参与角色 0-供给 1-需求",dataType = "Boolean"),
             @ApiImplicitParam(name = "price",value = "出价",dataType = "BigDecimal")
     })
-    public AjaxJson postPrice(@RequestParam("userId") String userId, @RequestParam("aucId") Integer aucId, @RequestParam("role") Boolean role, @RequestParam("price") BigDecimal price){
+    public AjaxJson postPrice(@RequestParam("userId") String userId, @RequestParam("aucId") Integer aucId, @RequestParam("role") Boolean role, @RequestParam("price") Float price){
         ParticipationEntity entity=new ParticipationEntity();
 
         entity.setPrice(price);
@@ -135,7 +135,7 @@ public class ParticipationAction {
         wrapper.eq(ParticipationEntity::getAucId,aucId).eq(ParticipationEntity::getUserId,userId);
 
         try{
-            BigDecimal price=participationService.getOne(wrapper).getPrice();
+            Float price=participationService.getOne(wrapper).getPrice();
             return AjaxJson.getSuccessData(price);
         }
         catch (Exception e){
@@ -150,6 +150,7 @@ public class ParticipationAction {
     @ApiImplicitParam(name = "id",value="拍卖id",dataType = "Integer")
     AjaxJson getWillPriceForm(Integer id){
         List<List<Float>> ans=new LinkedList<>();
+        ans=participationService.getWillPriceForm(id);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
         }

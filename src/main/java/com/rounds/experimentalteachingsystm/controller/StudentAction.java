@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.rounds.experimentalteachingsystm.entity.TeacherEntity;
+import com.rounds.experimentalteachingsystm.service.CourseService;
 import com.rounds.experimentalteachingsystm.service.StudentService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.Api;
@@ -12,10 +13,15 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Dictionary;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -31,6 +37,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentAction {
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    CourseService courseService;
 
     /**
      * 修改学生性别
@@ -88,6 +97,24 @@ public class StudentAction {
             e.printStackTrace();
             return AjaxJson.getError();
         }
+    }
+
+    @GetMapping("/getStuClassCours")
+    @ApiOperation(value = "获取学生课程班级信息")
+    public AjaxJson getStuClassCours(){
+        List<Map<String,String>> res=studentService.getStuClassCours();
+        try{
+        for(Map<String,String> item :res ){
+            Integer courseId=Integer.valueOf(item.get("courseId"));
+            item.put("courseName",courseService.getById(courseId).getCourseName());
+        }
+        return AjaxJson.getSuccessData(res);
+        }
+        catch (Exception e){
+            return AjaxJson.getError(e.toString());
+        }
+
+
     }
 
 

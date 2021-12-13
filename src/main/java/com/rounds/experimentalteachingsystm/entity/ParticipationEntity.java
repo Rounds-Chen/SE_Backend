@@ -43,7 +43,7 @@ public class ParticipationEntity implements Serializable {
       /**
      * 出价
      */
-      private BigDecimal price;
+      private Float price;
 
     public Integer getAucId() {
         return aucId;
@@ -77,11 +77,11 @@ public class ParticipationEntity implements Serializable {
           this.role = role;
       }
     
-    public BigDecimal getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-      public void setPrice(BigDecimal price) {
+      public void setPrice(Float price) {
           this.price = price;
       }
 
