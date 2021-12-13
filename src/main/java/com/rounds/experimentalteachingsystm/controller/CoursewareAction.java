@@ -1,8 +1,11 @@
 package com.rounds.experimentalteachingsystm.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.rounds.experimentalteachingsystm.entity.CoursewareEntity;
+import com.rounds.experimentalteachingsystm.service.CourseService;
 import com.rounds.experimentalteachingsystm.service.CoursewareService;
 import com.rounds.experimentalteachingsystm.service.FileStorageService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,43 +40,70 @@ public class CoursewareAction {
     CoursewareService coursewareService;
 
     @Autowired
+    CourseService courseService;
+
+    @Autowired
     private FileStorageService fileStorageService;
-
-    /**
-     * 获取某课程所有课件
-     * @param id 课程id
-     * @return
-     */
-    @GetMapping("//getCourseware")
-    @ApiOperation(value = "获取某课程所有课件")
-    public AjaxJson getCourseware(@ApiParam(value = "课程id") Integer id){
-        LambdaUpdateWrapper<CoursewareEntity> wrapper=new LambdaUpdateWrapper<>();
-        wrapper.eq(CoursewareEntity::getCourseId,id);
-
-        List<CoursewareEntity> ans;
-        try{
-            ans=coursewareService.list(wrapper);
-        }
-        catch (Exception e){
-            System.out.println(e);
-            return AjaxJson.getError();
-        }
-        return AjaxJson.getSuccessData(ans);
-    }
 
     /**
      * 获取某课件
      * @param id 课件id
      * @return
      */
-    @GetMapping("/getCoursewareById")
-    @ApiOperation(value = "获取某课件")
-    public AjaxJson getCoursewareById(@ApiParam(value = "课程id") Integer id){
-        CoursewareEntity entity=coursewareService.getById(id);
-        if(entity!=null){
-            return AjaxJson.getSuccessData(entity);
+    @GetMapping("//getCoursewareById")
+    @ApiOperation(value = "根据id获取某课件")
+    @ApiImplicitParam(name = "id",value = "课件id",dataType = "Integer")
+    public AjaxJson getCoursewareById(Integer id){
+
+        try{
+           CoursewareEntity ans=coursewareService.getById(id);
+
+            Map<String,String> tmp=new HashMap<>();
+            tmp.put("name",ans.getCoursewareName());
+            tmp.put("updateTime",String.valueOf(ans.getTime()));
+            tmp.put("link",ans.getLink());
+            tmp.put("type",ans.getType());
+            tmp.put("coursename",courseService.getById(id).getCourseName());
+
+            return AjaxJson.getSuccessData(tmp);
         }
-        return AjaxJson.getError();
+        catch (Exception e){
+            System.out.println(e);
+            return AjaxJson.getError();
+        }
+
+    }
+
+    /**
+     * 获取某课程所有课件
+     * @param id 课程id
+     * @return
+     */
+    @GetMapping("/getCoursewares")
+    @ApiOperation(value = "获取某课程所有课件")
+    @ApiImplicitParam(name = "id",value = "课程id",dataType = "Integer")
+    public AjaxJson getCoursewares(Integer id){
+        try {
+            LambdaQueryWrapper<CoursewareEntity> wrapper=new LambdaQueryWrapper<>();
+            wrapper.eq(CoursewareEntity::getCourseId,id);
+            List<CoursewareEntity> entity = coursewareService.list(wrapper);
+            List<Map<String,String>> res=new LinkedList<>();
+
+            for(CoursewareEntity e:entity){
+                Map<String,String> tmp=new HashMap<>();
+                tmp.put("name",e.getCoursewareName());
+                tmp.put("updateTime",String.valueOf(e.getTime()));
+                tmp.put("link",e.getLink());
+                tmp.put("type",e.getType());
+                tmp.put("coursename",courseService.getById(id).getCourseName());
+
+                res.add(tmp);
+
+            }
+            return AjaxJson.getSuccessData(res);
+        }catch (Exception e){
+            return AjaxJson.getError(e.toString());
+        }
     }
 
     /**
