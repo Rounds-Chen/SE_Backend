@@ -1,5 +1,6 @@
 package com.rounds.experimentalteachingsystm.service.impl;
 
+import com.rounds.experimentalteachingsystm.entity.StuClassCoursEntity;
 import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.rounds.experimentalteachingsystm.mapper.StudentMapper;
 import com.rounds.experimentalteachingsystm.service.StudentService;
@@ -24,12 +25,12 @@ import java.util.Map;
 public class StudentServiceImp extends ServiceImpl<StudentMapper, StudentEntity> implements StudentService {
 
     @Autowired
-    StudentService studentService;
+    StudentMapper studentMapper;
 
     @Override
-    public List<Map<String, String>> getStuClassCours() {
-        List<Map<String,String>> res=new LinkedList<>();
-                res=studentService.getStuClassCours();
+    public List<StuClassCoursEntity> getStuClassCours() {
+        List<StuClassCoursEntity> res=new LinkedList<>();
+        res=studentMapper.getStuClassCours();
         System.out.println("测试"+res.toString());
         return res;
     }

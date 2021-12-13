@@ -1,5 +1,6 @@
 package com.rounds.experimentalteachingsystm;
 
+import com.rounds.experimentalteachingsystm.entity.StuClassCoursEntity;
 import com.rounds.experimentalteachingsystm.mapper.ReportMapper;
 import com.rounds.experimentalteachingsystm.service.ReportService;
 import com.rounds.experimentalteachingsystm.service.StudentService;
@@ -26,9 +27,9 @@ public class SimpleTest {
 
     @Test
     public void test2(){
-        List<Map<String,String>> ans=studentService.getStuClassCours();
+        List<StuClassCoursEntity> ans=studentService.getStuClassCours();
 
-        System.out.println(ans);
+        System.out.println(ans.toArray());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.rounds.experimentalteachingsystm.service;
 
+import com.rounds.experimentalteachingsystm.entity.StuClassCoursEntity;
 import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,5 +18,5 @@ import java.util.Map;
  */
 public interface StudentService extends IService<StudentEntity> {
 
-    public List<Map<String,String>> getStuClassCours();
+    public List<StuClassCoursEntity> getStuClassCours();
 }

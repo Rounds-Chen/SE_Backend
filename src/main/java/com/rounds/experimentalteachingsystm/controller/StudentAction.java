@@ -3,6 +3,7 @@ package com.rounds.experimentalteachingsystm.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.rounds.experimentalteachingsystm.entity.StuClassCoursEntity;
 import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.rounds.experimentalteachingsystm.entity.TeacherEntity;
 import com.rounds.experimentalteachingsystm.service.CourseService;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Dictionary;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -102,13 +101,20 @@ public class StudentAction {
     @GetMapping("/getStuClassCours")
     @ApiOperation(value = "获取学生课程班级信息")
     public AjaxJson getStuClassCours(){
-        List<Map<String,String>> res=studentService.getStuClassCours();
+        List<StuClassCoursEntity> res=studentService.getStuClassCours();
+        List<Map<String,String>> ans=new LinkedList<>();
         try{
-        for(Map<String,String> item :res ){
-            Integer courseId=Integer.valueOf(item.get("courseId"));
-            item.put("courseName",courseService.getById(courseId).getCourseName());
+        for(StuClassCoursEntity item :res ){
+            Integer courseId=item.getCourse_name();
+            Map<String,String> tmp=new HashMap<>();
+            tmp.put("student_name",item.getStu_name());
+            tmp.put("student_id",item.getStudent_id());
+            tmp.put("class_id",String.valueOf(item.getClass_id()));
+            tmp.put("course_name",courseService.getById(courseId).getCourseName());
+
+            ans.add(tmp);
         }
-        return AjaxJson.getSuccessData(res);
+        return AjaxJson.getSuccessData(ans);
         }
         catch (Exception e){
             return AjaxJson.getError(e.toString());
