@@ -49,6 +49,9 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
         for(int i=1;i<prices.size();i++){
             if(prices.get(i)!=prePrice){
                 ans.add(Arrays.asList(BigDecimal.valueOf(count),prePrice));
+                if(i!=prices.size()) {
+                    prePrice = prices.get(i);
+                }
             }
             count+=1;
         }

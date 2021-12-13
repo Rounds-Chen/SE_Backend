@@ -96,7 +96,8 @@ public class ParticipationAction {
      */
     @GetMapping("/getSupPriceCurve")
     @ApiOperation(value = "获取某拍卖供给曲线")
-   public AjaxJson getSupPriceCurve(@ApiParam(value = "拍卖id") Integer id){
+    @ApiImplicitParam(name="id",value = "拍卖id",dataType = "Integer")
+   public AjaxJson getSupPriceCurve(Integer id){
         List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.FALSE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
