@@ -8,11 +8,8 @@ import com.rounds.experimentalteachingsystm.service.ParticipationService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
@@ -49,7 +46,7 @@ public class ParticipationAction {
             @ApiImplicitParam(name = "role",value = "参与角色 0-供给 1-需求",dataType = "Boolean"),
             @ApiImplicitParam(name = "price",value = "出价",dataType = "BigDecimal")
     })
-    public AjaxJson postPrice(String userId,Integer aucId, Boolean role, BigDecimal price){
+    public AjaxJson postPrice(@RequestParam("userId") String userId, @RequestParam("aucId") Integer aucId, @RequestParam("role") Boolean role, @RequestParam("price") BigDecimal price){
         ParticipationEntity entity=new ParticipationEntity();
 
         entity.setPrice(price);
