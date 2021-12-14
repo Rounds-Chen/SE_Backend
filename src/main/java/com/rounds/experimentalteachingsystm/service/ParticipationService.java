@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-12-01
  */
 public interface ParticipationService extends IService<ParticipationEntity> {
-    public List<List<BigDecimal>> getPriceCurve(Integer id,Boolean role);
+    public List<List<Float>> getPriceCurve(Integer id,Boolean role);
 
     public List<List<Float>> getWillPriceForm(Integer id);
 

@@ -96,7 +96,7 @@ public class ParticipationAction {
     @ApiOperation(value = "获取某拍卖供给曲线")
     @ApiImplicitParam(name="id",value = "拍卖id",dataType = "Integer")
    public AjaxJson getSupPriceCurve(Integer id){
-        List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.FALSE);
+        List<List<Float>> ans=participationService.getPriceCurve(id,Boolean.FALSE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
         }
@@ -111,7 +111,7 @@ public class ParticipationAction {
     @GetMapping("/getDemPriceCurve")
     @ApiOperation(value = "获取某拍卖需求价格曲线")
     public AjaxJson getDemPriceCurve(@ApiParam(value = "拍卖id") Integer id){
-        List<List<BigDecimal>> ans=participationService.getPriceCurve(id,Boolean.TRUE);
+        List<List<Float>> ans=participationService.getPriceCurve(id,Boolean.TRUE);
         if(ans!=null){
             return AjaxJson.getSuccessData(ans);
         }
