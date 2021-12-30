@@ -147,7 +147,7 @@ public class CoursewareAction {
     @PostMapping("/deleteCourseWare")
     @ApiOperation(value = "删除课件")
     @ApiImplicitParam(name = "id",value = "课件id",type = "Integer")
-    public AjaxJson deleteCourseware(@ApiParam(value = "课件id") Integer id){
+    public AjaxJson deleteCourseware( Integer id){
         String fileLink=coursewareService.getById(id).getLink();
         fileStorageService.delete(fileLink);
 

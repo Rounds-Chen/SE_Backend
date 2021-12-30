@@ -42,7 +42,7 @@ public class ExperimentAction {
     @GetMapping("/getAll")
     @ApiOperation(value = "获取某课程所有实验")
     @ApiImplicitParam(name = "courseId",value = "课程id",type = "Integer")
-    AjaxJson getAllExper(@ApiParam(value = "课程id") Integer courseId){
+    AjaxJson getAllExper(Integer courseId){
         LambdaQueryWrapper<ExperimentEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ExperimentEntity::getCourseId,courseId);
 
@@ -52,7 +52,7 @@ public class ExperimentAction {
     @PostMapping("/setWeights")
     @ApiOperation("设置实验权重")
     @ApiImplicitParam(name = "exp",value = "权重json序列化结果",type = "String")
-    AjaxJson setWeights(@ApiParam(value = "权重json序列化结果") String exp){
+    AjaxJson setWeights(String exp){
         JSONObject experWeights=JSONObject.parseObject(exp);
         LambdaUpdateWrapper<ExperimentEntity> wrapper=new LambdaUpdateWrapper<>();
 

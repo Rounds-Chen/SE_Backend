@@ -37,7 +37,7 @@ public class ClassAction {
     @ApiOperation(value="获取班级信息")
     @GetMapping("/getClassInfos")
     @ApiImplicitParam(name="id",value = "班级id",type = "Integer")
-    AjaxJson getClassInfos(@ApiParam(name="id",value = "班级id")Integer id){
+    AjaxJson getClassInfos(Integer id){
         ClassEntity entity=classService.getById(id);
         if(entity!=null){
             return AjaxJson.getSuccessData(entity);

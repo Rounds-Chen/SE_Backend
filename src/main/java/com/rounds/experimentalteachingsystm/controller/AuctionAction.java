@@ -34,7 +34,8 @@ public class AuctionAction {
      * @return
      */
     @GetMapping("/getAuction")
-    public AjaxJson getAuction(@ApiParam(value = "拍卖id") Integer id){
+    @ApiImplicitParam(name = "id",value = "拍卖id",type = "Integer")
+    public AjaxJson getAuction(Integer id){
         AuctionEntity res=auctionService.getById(id);
         if(res!=null){
             return AjaxJson.getSuccessData(res);

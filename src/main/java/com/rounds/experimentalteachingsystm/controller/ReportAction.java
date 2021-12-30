@@ -44,7 +44,7 @@ public class ReportAction {
     @GetMapping("//getReport")
     @ApiOperation(value = "获取某学生所有报告")
     @ApiImplicitParam(name = "id",value = "学生id",type = "String")
-    AjaxJson getReportOfStu(@ApiParam(value = "学生id") String id){
+    AjaxJson getReportOfStu(String id){
         LambdaUpdateWrapper<ReportEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(ReportEntity::getStudentId,id);
 
