@@ -9,6 +9,7 @@ import com.rounds.experimentalteachingsystm.mapper.ReportMapper;
 import com.rounds.experimentalteachingsystm.service.ReportService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class ReportAction {
      */
     @GetMapping("//getReport")
     @ApiOperation(value = "获取某学生所有报告")
+    @ApiImplicitParam(name = "id",value = "学生id",type = "String")
     AjaxJson getReportOfStu(@ApiParam(value = "学生id") String id){
         LambdaUpdateWrapper<ReportEntity> wrapper=new LambdaUpdateWrapper<>();
         wrapper.eq(ReportEntity::getStudentId,id);

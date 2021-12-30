@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,7 +52,7 @@ public class AucReportAction {
             @ApiImplicitParam(name="stuId",value = "学生id",dataType = "String"),
             @ApiImplicitParam(name="aucId",value = "拍卖id",dataType = "Integer")
     })
-    AjaxJson submitReport(String stuId, Integer aucId, MultipartFile file){
+    AjaxJson submitReport( String stuId, Integer aucId, MultipartFile file){
             String filePath=fileStorageService.upload(file);
             String suffix=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 

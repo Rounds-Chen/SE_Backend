@@ -75,11 +75,14 @@ public class LoginAction {
     }
 
     @GetMapping("/checkUser")
+    @ApiOperation(value = "检查用户是否存在")
+    @ApiImplicitParam(name = "userId",value = "用户id",type = "String")
     public AjaxJson checkUser(String userID){
         return loginService.checkID(userID)?AjaxJson.getSuccess():AjaxJson.getError("账号不存在！");
     }
 
     @RequestMapping("/logOut")
+    @ApiOperation(value = "登出")
     public void logOut(){StpUtil.logout();}
 
 
@@ -157,6 +160,11 @@ public class LoginAction {
      * @return
      */
     @GetMapping("/getPwd")
+    @ApiOperation(value = "获取旧密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "用户id",type = "String"),
+            @ApiImplicitParam(name = "flag",value = "用户身份1-教师 0-学生",type = "Boolean")
+    })
     public AjaxJson getPassword(String id,Boolean flag){
         Map<String,String> ans=new HashMap<>();
         if(flag) {

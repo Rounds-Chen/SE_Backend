@@ -10,6 +10,7 @@ import com.rounds.experimentalteachingsystm.entity.ExperimentEntity;
 import com.rounds.experimentalteachingsystm.service.ExperimentService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class ExperimentAction {
 //    @SaCheckLogin
     @GetMapping("/getAll")
     @ApiOperation(value = "获取某课程所有实验")
+    @ApiImplicitParam(name = "courseId",value = "课程id",type = "Integer")
     AjaxJson getAllExper(@ApiParam(value = "课程id") Integer courseId){
         LambdaQueryWrapper<ExperimentEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ExperimentEntity::getCourseId,courseId);
@@ -49,6 +51,7 @@ public class ExperimentAction {
 
     @PostMapping("/setWeights")
     @ApiOperation("设置实验权重")
+    @ApiImplicitParam(name = "exp",value = "权重json序列化结果",type = "String")
     AjaxJson setWeights(@ApiParam(value = "权重json序列化结果") String exp){
         JSONObject experWeights=JSONObject.parseObject(exp);
         LambdaUpdateWrapper<ExperimentEntity> wrapper=new LambdaUpdateWrapper<>();

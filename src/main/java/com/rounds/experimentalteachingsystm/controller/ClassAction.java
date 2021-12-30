@@ -5,6 +5,7 @@ import com.rounds.experimentalteachingsystm.entity.ClassEntity;
 import com.rounds.experimentalteachingsystm.service.ClassService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class ClassAction {
      */
     @ApiOperation(value="获取班级信息")
     @GetMapping("/getClassInfos")
+    @ApiImplicitParam(name="id",value = "班级id",type = "Integer")
     AjaxJson getClassInfos(@ApiParam(name="id",value = "班级id")Integer id){
         ClassEntity entity=classService.getById(id);
         if(entity!=null){

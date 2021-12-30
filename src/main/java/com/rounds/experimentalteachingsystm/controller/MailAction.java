@@ -77,7 +77,7 @@ public class MailAction {
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "to",value = "收件邮箱",dataType = "String"),
 //            @ApiImplicitParam(name = "req",value = "发送邮件请求",dataType = "HttpServletRequest")
-//    })
+//    })https://pricemonitor.online/
     public AjaxJson sendVeriCode(@ApiParam(name = "to",value = "收件邮箱")@RequestParam("to") String to, HttpServletRequest req){
         String subject="密码重置验证码";
         String content="验证码获取失败"; //验证码

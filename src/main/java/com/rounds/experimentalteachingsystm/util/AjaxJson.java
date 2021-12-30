@@ -16,15 +16,19 @@ public class AjaxJson implements Serializable{
     public static final int CODE_WARNING = 501;			// 警告状态码
     public static final int CODE_NOT_JUR = 403;			// 无权限状态码
     public static final int CODE_NOT_LOGIN = 401;		// 未登录状态码
+//    public static final int CODE_ERROR_PWD=400; //密码错误
+    public static final int CODE_USER_NOT_EXIST=404; //用户不存在
+    public static final int CODE_USER_ALREADY_EXIST=402; // 用户已存在
 //    public static final int CODE_INVALID_REQUEST = 400;	// 无效请求状态码
 
     public static final int CODE_NO_VERICODE=400; // 邮件验证码过期或不存在状态码
     public static final int CODE_INVALID_CODE=405;// 邮件验证码输入错误状态码
 
+
     public int code; 	// 状态码
-    public String msg; 	// 描述信息
+    public String message; 	// 描述信息
     public Object data; // 携带对象
-    public Long dataCount;	// 数据总数，用于分页
+    public Boolean success; //是否成功
 
     /**
      * 返回code
@@ -38,11 +42,11 @@ public class AjaxJson implements Serializable{
      * 给msg赋值，连缀风格
      */
     public AjaxJson setMsg(String msg) {
-        this.msg = msg;
+        this.message = msg;
         return this;
     }
     public String getMsg() {
-        return this.msg;
+        return this.message;
     }
 
     /**
@@ -63,49 +67,52 @@ public class AjaxJson implements Serializable{
 
     // ============================  构建  ==================================
 
-    public AjaxJson(int code, String msg, Object data, Long dataCount) {
+    public AjaxJson(int code, String msg, Object data, Boolean suc) {
         this.code = code;
-        this.msg = msg;
+        this.message = msg;
         this.data = data;
-        this.dataCount = dataCount;
+        this.success=suc;
     }
 
     // 返回成功
     public static AjaxJson getSuccess() {
-        return new AjaxJson(CODE_SUCCESS, "ok", null, null);
+        return new AjaxJson(CODE_SUCCESS, "ok", null, true);
     }
     public static AjaxJson getSuccess(String msg) {
-        return new AjaxJson(CODE_SUCCESS, msg, null, null);
+        return new AjaxJson(CODE_SUCCESS, msg, null, true);
     }
     public static AjaxJson getSuccess(String msg, Object data) {
-        return new AjaxJson(CODE_SUCCESS, msg, data, null);
+        return new AjaxJson(CODE_SUCCESS, msg, data, true);
     }
     public static AjaxJson getSuccessData(Object data) {
-        return new AjaxJson(CODE_SUCCESS, "ok", data, null);
+        return new AjaxJson(CODE_SUCCESS, "ok", data, true);
     }
     public static AjaxJson getSuccessArray(Object... data) {
-        return new AjaxJson(CODE_SUCCESS, "ok", data, null);
+        return new AjaxJson(CODE_SUCCESS, "ok", data, true);
     }
 
     // 返回失败
     public static AjaxJson getError() {
-        return new AjaxJson(CODE_ERROR, "error", null, null);
+        return new AjaxJson(CODE_ERROR, "error", null, false);
     }
     public static AjaxJson getError(String msg) {
-        return new AjaxJson(CODE_ERROR, msg, null, null);
+        return new AjaxJson(CODE_ERROR, msg, null, false);
     }
+//    public static AjaxJson getErrorPwd(String msg){return new AjaxJson(CODE_ERROR_PWD,msg,null,false);}
+    public static AjaxJson getErrorUsrNotExist(String msg){return new AjaxJson(CODE_USER_NOT_EXIST,msg,null,false);}
+    public static AjaxJson getErrorUsrAlreadyExist(String msg){return new AjaxJson(CODE_USER_ALREADY_EXIST,msg,null,false);};
 
     // 返回警告
     public static AjaxJson getWarning() {
-        return new AjaxJson(CODE_ERROR, "warning", null, null);
+        return new AjaxJson(CODE_ERROR, "warning", null, false);
     }
     public static AjaxJson getWarning(String msg) {
-        return new AjaxJson(CODE_WARNING, msg, null, null);
+        return new AjaxJson(CODE_WARNING, msg, null, false);
     }
 
     // 返回未登录
     public static AjaxJson getNotLogin() {
-        return new AjaxJson(CODE_NOT_LOGIN, "未登录，请登录后再次访问", null, null);
+        return new AjaxJson(CODE_NOT_LOGIN, "Sign-in required", null, false);
     }
 
     // 返回没有权限的
@@ -124,8 +131,8 @@ public class AjaxJson implements Serializable{
     }
 
     // 返回分页和数据的
-    public static AjaxJson getPageData(Long dataCount, Object data){
-        return new AjaxJson(CODE_SUCCESS, "ok", data, dataCount);
+    public static AjaxJson getPageData(Object data){
+        return new AjaxJson(CODE_SUCCESS, "ok", data,true );
     }
 
     // 返回，根据受影响行数的(大于0=ok，小于0=error)
@@ -159,7 +166,7 @@ public class AjaxJson implements Serializable{
                 + "\"code\": " + this.getCode()
                 + ", \"msg\": \"" + this.getMsg() + "\""
                 + ", \"data\": " + data_string
-                + ", \"dataCount\": " + dataCount
+                + ", \"success\": " + this.success
                 + "}";
     }
 

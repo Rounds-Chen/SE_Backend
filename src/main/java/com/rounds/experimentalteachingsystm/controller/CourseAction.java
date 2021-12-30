@@ -38,17 +38,21 @@ public class CourseAction {
      * @return
      */
     @GetMapping("//getAll")
+    @ApiOperation(value = "获取所有课程")
     AjaxJson getAllCourses(){
         return AjaxJson.getSuccessData(courseService.list());
     }
 
     @PostMapping("//postCourse")
+    @ApiOperation(value = "发布新的课程")
     AjaxJson  postCourse(CourseEntity courseEntity){
         boolean flg=courseService.save(courseEntity);
         if(flg) return AjaxJson.getSuccess();
         else return AjaxJson.getError();
     }
     @GetMapping("//deleteCourse")
+    @ApiOperation(value = "删除课程")
+    @ApiImplicitParam(name = "id",value = "班级id",type = "int")
     AjaxJson deleteCourse(int id){
         return AjaxJson.getSuccessData(courseService.removeById(id));
     }
