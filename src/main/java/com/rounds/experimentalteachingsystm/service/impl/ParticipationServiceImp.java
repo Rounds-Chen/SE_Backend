@@ -82,7 +82,7 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
                 rest=rest-count;
                 count=0f;
                 prePrice=prices.get(i);
-                prepre=prices.get(i-1);
+                prepre=prices.get(i-1);//
             }
             count+=1f;
         }
