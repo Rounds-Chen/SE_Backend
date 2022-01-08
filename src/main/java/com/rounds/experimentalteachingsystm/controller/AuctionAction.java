@@ -9,6 +9,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,17 +49,16 @@ public class AuctionAction {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "initiatorId",value = "发布人id",dataType = "String"),
             @ApiImplicitParam(name = "title",value = "拍卖标题",dataType = "String"),
-            @ApiImplicitParam(name="begin",value = "开始时间",dataType = "LocalDateTime"),
-            @ApiImplicitParam(name="end",value = "结束时间",dataType = "LocalDateTime"),
             @ApiImplicitParam(name = "des",value = "拍卖描述",dataType = "String"),
     })
-    public AjaxJson postAuction(String initiatorId,String title, LocalDateTime begin, LocalDateTime end, String des){
+    public AjaxJson postAuction(@RequestParam("initiatorId")String initiatorId,@RequestParam("title") String title,  @RequestParam("des") String des){
         AuctionEntity entity=new AuctionEntity();
         entity.setAuctionTitle(title);
         entity.setDescription(des);
-        entity.setStartTime(begin);
-        entity.setEndTime(end);
+//        entity.setStartTime(begin);
+//        entity.setEndTime(end);
         entity.setInitiatorId(initiatorId);
+        entity.setBalancePrice(BigDecimal.valueOf(0));
 
         if(auctionService.save(entity)){
             Map<String,Integer> res=new HashMap<>();
