@@ -32,7 +32,7 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
     @Override
     public List<List<Float>> getPriceCurve(Integer id,Boolean role) {
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
-        wrapper.eq(ParticipationEntity::getAucId,id).eq(ParticipationEntity::getRole,0).
+        wrapper.eq(ParticipationEntity::getAucId,id).
                 select(ParticipationEntity::getPrice);
         List<Float> prices=mapper.selectObjs(wrapper).stream()
                 .map(o -> (Float)o)
@@ -50,15 +50,14 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
 
         List<List<Float>> ans=new LinkedList<>();
         for(int i=1;i<prices.size();i++){
-            if(prices.get(i)!=prePrice){
+            if(!prices.get(i).equals(prePrice)){
                 ans.add(Arrays.asList(Float.valueOf(count),prePrice));
-                if(i!=prices.size()) {
-                    prePrice = prices.get(i);
-                }
+                prePrice = prices.get(i);
+
             }
             count+=1;
         }
-
+        ans.add(Arrays.asList(Float.valueOf(count),prePrice));
         return ans;
     }
 
@@ -76,16 +75,18 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
         Float count=1f;
         Float rest=Float.valueOf(prices.size());
         Float prePrice=prices.get(0);
+        Float prepre=prePrice;
         for(int i=1;i<prices.size();i++){
-            if(prePrice!=prices.get(i)){
-                ans.add(Arrays.asList(prePrice,count,rest,rest*prePrice));
+            if(!prePrice.equals(prices.get(i))){
+                ans.add(Arrays.asList(prePrice,count,rest,rest*prepre));
                 rest=rest-count;
                 count=0f;
                 prePrice=prices.get(i);
+                prepre=prices.get(i-1);//
             }
             count+=1f;
         }
-        ans.add(Arrays.asList(prePrice,count,rest,rest*prePrice));
+        ans.add(Arrays.asList(prePrice,count,rest,rest*prepre));
 
         return ans;
     }
