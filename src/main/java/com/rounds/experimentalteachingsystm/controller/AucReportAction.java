@@ -2,16 +2,15 @@ package com.rounds.experimentalteachingsystm.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.rounds.experimentalteachingsystm.entity.AucReport2Entity;
 import com.rounds.experimentalteachingsystm.entity.AucReportEntity;
 import com.rounds.experimentalteachingsystm.service.AucReport2Service;
 import com.rounds.experimentalteachingsystm.service.AucReportService;
 import com.rounds.experimentalteachingsystm.service.FileStorageService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +46,39 @@ public class AucReportAction {
     @Autowired
     AucReport2Service aucReport2Service;
 
+    @PostMapping("//reviewReport")
+    @ApiOperation(value = "批改实验报告")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "学生id",type="String"),
+            @ApiImplicitParam(name = "score",value = "成绩",type = "Integer")
+    })
+    AjaxJson reviewReport(String id,Integer score){
+        LambdaUpdateWrapper<AucReport2Entity> wrapper=new LambdaUpdateWrapper<>();
+        wrapper.eq(AucReport2Entity::getId,id).set(AucReport2Entity::getScore,score);
+        try{
+            if(aucReport2Service.update(wrapper)){
+                return AjaxJson.getSuccess();
+            }else{
+                return AjaxJson.getError();
+            }
+        }catch (Exception e){
+            return AjaxJson.getError(e.toString());
+        }
+    }
+
+    @RequestMapping("//getReport")
+    @ApiOperation(value = "获取某学生实验报告")
+    @ApiImplicitParam(name = "id",value = "学生id",type = "String")
+    AjaxJson getReportById( String id){
+        LambdaQueryWrapper<AucReport2Entity> wrapper=new LambdaQueryWrapper<>();
+        wrapper.eq(AucReport2Entity::getId,id);
+        try{
+            AucReport2Entity entity=aucReport2Service.getOne(wrapper);
+            return AjaxJson.getSuccessData(entity);
+        }catch (Exception e){
+            return AjaxJson.getError(e.toString());
+        }
+    }
 
     @RequestMapping("//getReports")
     @ApiOperation(value = "获取所有实验报告")
