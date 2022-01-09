@@ -29,6 +29,13 @@ public class AuctionAction {
     @Autowired
     AuctionService auctionService;
 
+
+
+    @GetMapping("//getAllAuction")
+    @ApiOperation(value = "获取所有拍卖")
+    AjaxJson getAllCourses(){
+        return AjaxJson.getSuccessData(auctionService.list());
+    }
     /**
      * 获取拍卖信息
      * @param id 拍卖id
