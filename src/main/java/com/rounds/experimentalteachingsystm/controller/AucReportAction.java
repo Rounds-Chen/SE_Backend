@@ -68,12 +68,14 @@ public class AucReportAction {
         JSONObject req=JSONObject.parseObject(body);
         String name=req.getString("name");
         String id=req.getString("id");
+        String title=req.getString("title");
         Blob content=new SerialBlob(req.getString("content").getBytes("GBK"));
 
         AucReport2Entity entity=new AucReport2Entity();
         entity.setContent(content);
         entity.setId(id);
         entity.setName(name);
+        entity.setAucTitle(title);
 
         try{
             aucReport2Service.save(entity);
