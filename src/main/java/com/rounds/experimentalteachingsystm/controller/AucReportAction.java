@@ -97,11 +97,12 @@ public class AucReportAction {
             @ApiImplicitParam(name="body",value = "页面内容",dataType = "String")
     })
     AjaxJson submitReport(@RequestBody String body) throws UnsupportedEncodingException, SQLException {
-        JSONObject req=JSONObject.parseObject(body);
+        JSONObject reqs=JSONObject.parseObject(body);
+        JSONObject req=reqs.getJSONObject("body");
         String name=req.getString("name");
         String id=req.getString("id");
         String title=req.getString("title");
-        Blob content=new SerialBlob(req.getString("content").getBytes("GBK"));
+        String content=req.getString("content");
 
         AucReport2Entity entity=new AucReport2Entity();
         entity.setContent(content);

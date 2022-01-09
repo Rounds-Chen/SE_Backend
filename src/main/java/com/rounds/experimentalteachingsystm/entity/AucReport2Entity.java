@@ -21,7 +21,7 @@ public class AucReport2Entity implements Serializable {
 
       private String id;
 
-    private Blob content;
+    private String content;
 
     private Integer score;
 
@@ -59,11 +59,11 @@ public class AucReport2Entity implements Serializable {
           this.id = id;
       }
     
-    public Blob getContent() {
+    public String getContent() {
         return content;
     }
 
-      public void setContent(Blob content) {
+      public void setContent(String content) {
           this.content = content;
       }
 
