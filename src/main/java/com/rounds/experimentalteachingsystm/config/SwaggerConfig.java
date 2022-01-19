@@ -31,7 +31,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("软件工程接口文档")
-                .termsOfServiceUrl("http://localhost:8081/") //"http://106.14.97.109:8081/"
+                .termsOfServiceUrl("http://localhost:8081/")
                 .build();
     }
 }
