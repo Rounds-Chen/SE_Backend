@@ -6,21 +6,21 @@ spring:
 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-    url:
-    username:
-    password:
+    url: jdbc:mysql://106.14.97.109/software_engineering
+    username: se
+    password: 123456
 
   mail:
     host: smtp.qq.com
-    username:
-    password:
+    username: 1418621447@qq.com
+    password: ulwatobgrrdyhdib
     default-encoding: UTF-8
 
   redis:
     database: 16
-    host:
-    port:
-    password:
+    host: 106.14.97.109
+    port: 6379
+    password: tssgrgxd
 
   servlet:
     multipart:
