@@ -62,7 +62,7 @@ public class AuctionAction {
         AuctionEntity entity=new AuctionEntity();
         entity.setAuctionTitle(title);
         entity.setDescription(des);
-//        entity.setStartTime(begin);
+//        entity.setStartTime(begin);??
 //        entity.setEndTime(end);
         entity.setInitiatorId(initiatorId);
         entity.setBalancePrice(BigDecimal.valueOf(0));
