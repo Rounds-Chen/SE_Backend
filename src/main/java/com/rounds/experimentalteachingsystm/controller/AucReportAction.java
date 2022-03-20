@@ -66,7 +66,7 @@ public class AucReportAction {
         }
     }
 
-    @RequestMapping("//getReport")
+    @GetMapping("//getReport")
     @ApiOperation(value = "获取某学生实验报告")
     @ApiImplicitParam(name = "id",value = "学生id",type = "String")
     AjaxJson getReportById( String id){
@@ -80,7 +80,7 @@ public class AucReportAction {
         }
     }
 
-    @RequestMapping("//getReports")
+    @GetMapping("//getReports")
     @ApiOperation(value = "获取所有实验报告")
     AjaxJson getReports(){
         try {
@@ -94,7 +94,7 @@ public class AucReportAction {
     @PostMapping("//postReport")
     @ApiOperation(value="提交报告")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="body",value = "页面内容",dataType = "String")
+            @ApiImplicitParam(name="body",value = "页面内容",type = "string")
     })
     AjaxJson submitReport(@RequestBody String body) throws UnsupportedEncodingException, SQLException {
         JSONObject reqs=JSONObject.parseObject(body);
