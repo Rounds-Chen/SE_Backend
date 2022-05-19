@@ -7,6 +7,7 @@ import com.rounds.experimentalteachingsystm.service.AuctionService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -61,7 +62,8 @@ public class AuctionAction {
             @ApiImplicitParam(name = "endTime",value = "结束时间",dataType = "LocalDateTime"),
     })
     public AjaxJson postAuction(@RequestParam("initiatorId")String initiatorId,@RequestParam("title") String title,  @RequestParam("des") String des,
-                                @RequestParam("startTime")LocalDateTime startTime,@RequestParam("endTime") LocalDateTime endTime){
+                                @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam("startTime")LocalDateTime startTime,
+                                @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam("endTime") LocalDateTime endTime){
         AuctionEntity entity=new AuctionEntity();
         entity.setAuctionTitle(title);
         entity.setDescription(des);
