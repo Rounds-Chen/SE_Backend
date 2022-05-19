@@ -33,6 +33,7 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
     public List<List<Float>> getPriceCurve(Integer id,Boolean role) {
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ParticipationEntity::getAucId,id).
+                eq(ParticipationEntity::getRole,role).
                 select(ParticipationEntity::getPrice);
         List<Float> prices=mapper.selectObjs(wrapper).stream()
                 .map(o -> (Float)o)
@@ -65,6 +66,7 @@ public class ParticipationServiceImp extends ServiceImpl<ParticipationMapper, Pa
     public List<List<Float>> getWillPriceForm(Integer id) {
         LambdaQueryWrapper<ParticipationEntity> wrapper=new LambdaQueryWrapper<>();
         wrapper.eq(ParticipationEntity::getAucId,id).
+                eq(ParticipationEntity::getRole,true).
                 select(ParticipationEntity::getPrice);
         List<Float> prices=mapper.selectObjs(wrapper).stream()
                 .map(o -> (Float)o)
