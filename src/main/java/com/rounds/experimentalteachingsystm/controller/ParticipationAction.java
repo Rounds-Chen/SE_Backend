@@ -4,6 +4,7 @@ package com.rounds.experimentalteachingsystm.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.rounds.experimentalteachingsystm.entity.AuctionEntity;
 import com.rounds.experimentalteachingsystm.entity.ParticipationEntity;
+import com.rounds.experimentalteachingsystm.service.AuctionService;
 import com.rounds.experimentalteachingsystm.service.ParticipationService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class ParticipationAction {
     @Autowired
     ParticipationService participationService;
 
+    @Autowired
+    AuctionService auctionService;
+
 
     /**
      * 上传出价
@@ -47,6 +52,15 @@ public class ParticipationAction {
             @ApiImplicitParam(name = "price",value = "出价",dataType = "BigDecimal")
     })
     public AjaxJson postPrice(@RequestParam("userId") String userId, @RequestParam("aucId") Integer aucId, @RequestParam("role") Boolean role, @RequestParam("price") Float price){
+        AuctionEntity auction = auctionService.getById(aucId);
+        LocalDateTime dt = LocalDateTime.now();
+        if(dt.isBefore(auction.getStartTime())){
+            return AjaxJson.getError("实验尚未开始!");
+        }
+        else if(dt.isAfter(auction.getEndTime())){
+            return AjaxJson.getError("实验已经结束!");
+        }
+
         ParticipationEntity entity=new ParticipationEntity();
 
         entity.setPrice(price);

@@ -57,13 +57,16 @@ public class AuctionAction {
             @ApiImplicitParam(name = "initiatorId",value = "发布人id",dataType = "String"),
             @ApiImplicitParam(name = "title",value = "拍卖标题",dataType = "String"),
             @ApiImplicitParam(name = "des",value = "拍卖描述",dataType = "String"),
+            @ApiImplicitParam(name = "startTime",value = "开始时间",dataType = "LocalDateTime"),
+            @ApiImplicitParam(name = "endTime",value = "结束时间",dataType = "LocalDateTime"),
     })
-    public AjaxJson postAuction(@RequestParam("initiatorId")String initiatorId,@RequestParam("title") String title,  @RequestParam("des") String des){
+    public AjaxJson postAuction(@RequestParam("initiatorId")String initiatorId,@RequestParam("title") String title,  @RequestParam("des") String des,
+                                @RequestParam("startTime")LocalDateTime startTime,@RequestParam("endTime") LocalDateTime endTime){
         AuctionEntity entity=new AuctionEntity();
         entity.setAuctionTitle(title);
         entity.setDescription(des);
-//        entity.setStartTime(begin);??
-//        entity.setEndTime(end);
+        entity.setStartTime(startTime);
+        entity.setEndTime(endTime);
         entity.setInitiatorId(initiatorId);
         entity.setBalancePrice(BigDecimal.valueOf(0));
 
