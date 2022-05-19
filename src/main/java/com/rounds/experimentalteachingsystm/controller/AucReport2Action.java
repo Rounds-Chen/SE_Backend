@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @since 2022-01-08
  */
 @RestController
-@RequestMapping("//aucReport2Entity")
+@RequestMapping("//reportEntity")
 public class AucReport2Action {
     @Autowired
     private AucReport2Service aucReport2Service;
