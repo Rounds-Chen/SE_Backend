@@ -35,7 +35,7 @@ import java.util.Map;
  */
 @RestController
 @Api
-@RequestMapping("//aucReportEntity")
+@RequestMapping("/auction/aucReportEntity")
 public class AucReportAction {
     @Resource
     FileStorageService fileStorageService;

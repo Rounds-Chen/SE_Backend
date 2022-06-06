@@ -27,7 +27,7 @@ import java.util.List;
  * @since 2021-12-01
  */
 @RestController
-@RequestMapping("//participationEntity")
+@RequestMapping("/auction/participationEntity")
 @Api
 public class ParticipationAction {
     @Autowired

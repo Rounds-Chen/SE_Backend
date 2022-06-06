@@ -2,7 +2,9 @@ package com.rounds.experimentalteachingsystm.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.rounds.experimentalteachingsystm.entity.AuctionEntity;
+import com.rounds.experimentalteachingsystm.entity.StudentEntity;
 import com.rounds.experimentalteachingsystm.service.AuctionService;
 import com.rounds.experimentalteachingsystm.util.AjaxJson;
 import io.swagger.annotations.*;
@@ -24,7 +26,7 @@ import java.util.Map;
  * @since 2021-12-01
  */
 @RestController
-@RequestMapping("//auctionEntity")
+@RequestMapping("/auction/auctionEntity")
 @Api
 public class AuctionAction {
     @Autowired
@@ -81,7 +83,47 @@ public class AuctionAction {
 
     }
 
+    @PostMapping("/updateAuction")
+    @ApiOperation(value = "修改拍卖")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "auctionId", value = "拍卖id", dataType = "int"),
+            @ApiImplicitParam(name = "initiatorId",value = "发布人id",dataType = "String"),
+            @ApiImplicitParam(name = "title",value = "拍卖标题",dataType = "String"),
+            @ApiImplicitParam(name = "des",value = "拍卖描述",dataType = "String"),
+            @ApiImplicitParam(name = "startTime",value = "开始时间",dataType = "LocalDateTime"),
+            @ApiImplicitParam(name = "endTime",value = "结束时间",dataType = "LocalDateTime"),
+    })
+    public AjaxJson postAuction(@RequestParam("auctionId") Integer auctionId, @RequestParam("initiatorId")String initiatorId,
+                                @RequestParam("title") String title,  @RequestParam("des") String des,
+                                @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam("startTime")LocalDateTime startTime,
+                                @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam("endTime") LocalDateTime endTime){
+        LambdaUpdateWrapper<AuctionEntity> wrapper=new LambdaUpdateWrapper<>();
+        AuctionEntity auctionEntity = auctionService.getById(auctionId);
+        if (!auctionEntity.getInitiatorId().equals(initiatorId)) {
+            System.out.println("DEBUG: wrong initiator.");
+            return AjaxJson.getError();
+        }
 
+        wrapper.eq(AuctionEntity::getAuctionId,auctionId).set(AuctionEntity::getAuctionTitle,title)
+                .set(AuctionEntity::getDescription, des).set(AuctionEntity::getStartTime, startTime)
+                .set(AuctionEntity::getEndTime, endTime);
+//        entity.setBalancePrice(BigDecimal.valueOf(0));
+
+        if(auctionService.update(wrapper)){
+            Map<String,Integer> res=new HashMap<>();
+            res.put("auction_id",auctionId);
+            return AjaxJson.getSuccessData(res);
+        };
+        return AjaxJson.getError();
+
+    }
+
+    @GetMapping("/deleteAuction")
+    @ApiOperation(value = "删除拍卖")
+    @ApiImplicitParam(name = "auctionId",value = "拍卖id",type = "int")
+    AjaxJson deleteCourse(int auctionId){
+        return AjaxJson.getSuccessData(auctionService.removeById(auctionId));
+    }
 
 }
 
