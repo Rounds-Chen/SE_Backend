@@ -18,4 +18,6 @@ public interface AuctionService extends IService<AuctionEntity> {
     List<AuctionEntity> getAllAuctionOnGoing();
 
     List<AuctionEntity> getAllAuctionNotStarted();
+
+    List<AuctionEntity> getAllAuctionEnded();
 }

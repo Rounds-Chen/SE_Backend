@@ -25,4 +25,7 @@ public interface AuctionMapper extends BaseMapper<AuctionEntity> {
 
     @Select("SELECT * FROM auction WHERE start_time > now()")
     List<AuctionEntity> getAllAuctionNotStarted();
+
+    @Select("SELECT * FROM auction WHERE end_time < now()")
+    List<AuctionEntity> getAllAuctionEnded();
 }

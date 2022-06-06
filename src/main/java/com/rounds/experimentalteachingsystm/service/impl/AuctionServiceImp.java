@@ -31,4 +31,9 @@ public class AuctionServiceImp extends ServiceImpl<AuctionMapper, AuctionEntity>
     public List<AuctionEntity> getAllAuctionNotStarted() {
         return auctionMapper.getAllAuctionNotStarted();
     }
+
+    @Override
+    public List<AuctionEntity> getAllAuctionEnded() {
+        return auctionMapper.getAllAuctionEnded();
+    }
 }

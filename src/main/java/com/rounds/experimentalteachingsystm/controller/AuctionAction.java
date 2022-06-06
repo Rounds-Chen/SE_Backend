@@ -48,7 +48,14 @@ public class AuctionAction {
     @GetMapping("//getAllAuctionNotStarted")
     @ApiOperation(value = "获取所有未开始的拍卖")
     AjaxJson getAllCoursesNotStarted(){
+
         return AjaxJson.getSuccessData(auctionService.getAllAuctionNotStarted());
+    }
+
+    @GetMapping("//getAllAuctionEnded")
+    @ApiOperation(value = "获取所有已结束的拍卖")
+    AjaxJson getAllAuctionEnded(){
+        return AjaxJson.getSuccessData(auctionService.getAllAuctionEnded());
     }
 
     /**
