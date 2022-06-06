@@ -25,7 +25,7 @@ import java.util.Map;
  * @since 2021-12-01
  */
 @RestController
-@RequestMapping("//auctionEntity")
+@RequestMapping("auction//auctionEntity")
 @Api
 public class AuctionAction {
     @Autowired
